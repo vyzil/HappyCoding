@@ -1,0 +1,17 @@
+
+# 점화식)
+A_(n+1) = A_n * a + b
+A_0 * a^k + {a^(k-1) + a ^(k-2) + ... + a^2 + a^1 + a^0}b
+
+- $가 한개일 때가 예외
+
+- $가 한개 이상이면, 
+A_0 * a^k + {(a^k - 1) / (a - 1)} * b 점화식 있긴 한데 금방 범위 넘어감
+
+
+
+1b9ac9ff 29 2 0 20000000 
+10000000
+
+xybbbbaxyaxybbaxyaxybbbbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybb
+xybbbbaxyaxybbaxyaxybbbbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybb

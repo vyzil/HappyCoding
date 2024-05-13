@@ -1,0 +1,11 @@
+    // a + w = b
+    // a = root_a + (root_a to a), b = root_b + (root_b to b)
+    // root_a + (root_a to a) + w = root_b + (root_b to b)
+    // root_a + (w + (root_a to a) - (root_b to b)) = root_b
+    // root_a + (w_root_ab) = root_b
+    // add higher height root to root, 
+    // assume root_a) root_b's root to root_a and make relative weight to (w_root_ab)
+    // else root_b -> w_root_ba = -w_root_ab
+
+
+        for(int j = 0;j < N; j++) printf("(%d: %d, %d, %d) ", j, ROOT[j].root, ROOT[j].weight, ROOT[j].height); printf("\n");

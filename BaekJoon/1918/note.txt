@@ -1,0 +1,114 @@
+# 
+
++ 만나면 Bracket 전까지 전부 출력
+
+
+#54: (A*(B-C/D))-E-F-((((G+(H*I)))-((J*(K*(L-M*N/O)-P/Q*R)/(S-T*U*V-W-X*Y/Z)))))
+answer: ABCD/-*E-F-GHI*+JKLMN*O/-*PQ/R*-*STU*V*-W-XY*Z/-/--
+
+ABCD/-*E-F-GHI*+JKLMN*O/-*PQ/R*-*STU*V*-W-XY*Z/-/--
+ABCD/-*E-F-GHI*+JKLMN*O/-*PQ/R*-STU*V*-W-XY*Z/-/*--
+
+#51: A*((B*C)/D-(E/F+(G*H/((I*J-(((K+L*M))))/N)))+O-P*(Q/R)+S)-T
+answer: ABC*D/EF/GH*IJ*KLM*+-N//+-O+PQR/*-S+*T-
+
+A*((B*C)/D-(E/F+(G*H/((I*J-(((K+L*M))))/N)))+O-P*(Q/R)+S)-T
+ABC*D/EF/GH*IJ*KLM*+-N//+-O+PQR/*-S+*T-
+ABC*D/EF/GH*IJ*KLM*+-N//+-O+PQR/*S+-*T-
+# 
+<op2> 만나면 바로 출력 가능
+<op1> 만나면 이전 <op1>을 출력
+
+A+B+C
+
+AB+C+
+
+
+# 
+<numA> <op1> <numB>
+<numA> <op1> [<numA> <op2> <numB>] => <numB>
+
+<op1>
+Sequence 
+
+
+# 
+
+<numA> <op1> <numB>
+<numA> <op1> [<numA> <op2> <numB>] => <numB>
+
+
+<op1> 
+<numA> <numB>
+
+numB가 들어오면 <op>를 pop
+
+
+*
+ABC+*
+
++
+ABC*+
+
+
+# 
+
+
+<num> <num> <op> -> 출력
+
+- 01
+A + B * C
+
+<num> <op1> <num> <op2> <num>
+
+<op2>
+
+<op1>
+
+<num> <num> <num> <op2> <op1>
+
+
+- 02 
+
+A + (B * C)
+
+<(> <op2>
+
+<op1> <(> 
+ 
+<num> <num>
+
+# 생각 01
+
+
+A+B
+
++
+AB+
+
+
+A*(B+C)
+*
+ABC+*
+
+
+A+(B*C)
++(*
+ABC*+
+
+A+(A+B*C)
+
+A+B*C
+
++
+AB
+
+뒤에가 곱하기나 나누기면 괄호를 넣는다..? -> 끝괄호는 어떻게...?
+a*b*c
+
+abc**
+
+
+1. 괄호 추가하기
+2. 괄호끝 나오면 첫 괄호까지 전부 출력
+
