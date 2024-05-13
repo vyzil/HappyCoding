@@ -46,6 +46,7 @@
 ### Topology Sort
 - [1005_ACM Craft](https://www.acmicpc.net/problem/1005)
 - [1432_그래프 수정](https://www.acmicpc.net/problem/1432)
+- [2252_줄 세우기](https://www.acmicpc.net/problem/2252)
 
 ### Union-Find
 - [3830_교수님은 기다리지 않는다](https://www.acmicpc.net/problem/3830)
