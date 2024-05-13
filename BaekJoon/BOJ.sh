@@ -21,6 +21,9 @@ main() {
         return 1
     fi
  
+
+    cd unsolved
+
     if [ ! -e $file_name ]; then
         mkdir "$file_name"
     fi

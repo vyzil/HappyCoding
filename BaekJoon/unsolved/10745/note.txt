@@ -1,0 +1,8 @@
+아호 코라식
+
+트라이로 구현
+
+각 Node
+go -> (data, ptr, next) -> (data, ptr, next) ..
+
+fail -> (ptr, next)
