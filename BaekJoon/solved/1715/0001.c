@@ -1,61 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int delete(int* arr, int size){
-    int res;
-    int curIdx, tmp, minIdx;
-
-    if(size == 0) return -1;
-
-    curIdx = 1;
-    res = arr[curIdx];
-    tmp = arr[size];
-    while(curIdx*2 < size){ 
-        minIdx = curIdx*2;
-        if((curIdx*2+1 < size) && (arr[minIdx] > arr[curIdx*2+1])) minIdx = curIdx*2+1;
-        if(arr[minIdx] > tmp) break;
-        arr[curIdx] = arr[minIdx];
-        curIdx = minIdx;
-    }
-    arr[curIdx] = tmp;
-
-    return res;
-}
-
-void insert(int *arr, int num, int size){
-    int curIdx;
-    curIdx = size+1;
-    while(arr[curIdx/2] > num){
-        arr[curIdx] = arr[curIdx/2];
-        curIdx /= 2;
-    }
-    arr[curIdx] = num;
-
-    return;
-}
+typedef struct DECK{
+    int num;
+    struct DECK* next;
+} deck;
 
 int main(void){
-    int i;
+    int i, tmp, sum;
     int N;
-    int *arr, tmp;
-    int first, second, size;
-    int sum;
+    deck *rootDeck, *curDeck, *newDeck, *firstDeck, *secondDeck;
 
+    rootDeck = (deck*)malloc(sizeof(deck));
+    rootDeck->next = NULL;
     scanf("%d", &N);
-    arr = (int*)malloc(sizeof(int)*(N+1));
-    arr[0] = 0;
-    for(i = 0 ; i < N; i++) {
+    for(i = 0; i < N; i++){
         scanf("%d", &tmp);
-        insert(arr, tmp, i);      
+        newDeck = (deck*)malloc(sizeof(deck));
+        newDeck->num = tmp;
+        curDeck = rootDeck;
+        while(curDeck->next){
+            if(curDeck->next->num > newDeck->num) break;
+            curDeck = curDeck->next;
+        }
+        newDeck->next = curDeck->next;
+        curDeck->next = newDeck;
     }
 
     sum = 0;
-    size = N;
-    first = delete(arr, size--);
-    while((second = delete(arr, size--)) > 0 ){        
-        sum += (first + second);
-        insert(arr, (first + second), size++);        
-        first = delete(arr, size--);
+    firstDeck = rootDeck->next;
+    secondDeck = firstDeck->next;
+    while(secondDeck){
+        rootDeck->next = secondDeck->next;   
+        firstDeck->num += secondDeck->num;
+        sum += firstDeck->num;
+        free(secondDeck);
+        
+        curDeck = rootDeck;
+        while(curDeck->next){
+            if(curDeck->next->num > firstDeck->num) break;
+            curDeck = curDeck->next;
+        }
+        firstDeck->next = curDeck->next;
+        curDeck->next = firstDeck;
+        
+        // Epilogue
+        firstDeck = rootDeck->next;
+        secondDeck = firstDeck->next;
     }
 
     printf("%d\n", sum);
