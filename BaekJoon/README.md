@@ -1,27 +1,27 @@
 
-# 0. 풀어볼 문제
+## 0. 풀어볼 문제
 - [9167_도발 봇](https://www.acmicpc.net/problem/9167) (구현, 파싱)
 - [11385_싱크스몰](https://www.acmicpc.net/problem/11385) (NTT)
 - [19535_ㄷㄷㄷㅈ](https://www.acmicpc.net/problem/19535) (두두둥장!)
 
 <br />
 
-# 1. 복습할 문제
+## 1. 복습할 문제
 
 다시 풀면서 공부할 문제
 
-## Brute Force
+### Brute Force
 - [29794_엘나스의 용사](https://www.acmicpc.net/problem/29794)
 
-## DFS / BFS
+### DFS / BFS
 - [16964_DFS 스페셜 저지](https://www.acmicpc.net/problem/16964)
 
-## Greedy
+### Greedy
 - [1715_카드 정렬하기](https://www.acmicpc.net/problem/1715)
 - [13884_삽삭 정렬](https://www.acmicpc.net/problem/13884)
 - [13904_과제](https://www.acmicpc.net/problem/13904)
 
-## DP
+### DP
 - [2096_내려가기](https://www.acmicpc.net/problem/2096) (Easy)
 - [2225_합분해](https://www.acmicpc.net/problem/2225) (Easy)
 - [2449_전구](https://www.acmicpc.net/problem/2449) (Medium)
@@ -33,33 +33,33 @@
 #### DP - LIS
 - [14003_가장 긴 증가하는 부분 수열 5](https://www.acmicpc.net/problem/14003)
 
-## Knapsack
+### Knapsack
 - [29792_규칙적인 보스돌이](https://www.acmicpc.net/problem/29792)
 
-## Dijkstra
+### Dijkstra
 - [1167_트리의 지름](https://www.acmicpc.net/problem/1167) (DFS)
 - [1967_트리의 지름](https://www.acmicpc.net/problem/1967) (1167과 비교해보기)
 
-## Floyd-Warshall
+### Floyd-Warshall
 - [14938_서강그라운드](https://www.acmicpc.net/problem/14938)
 
-## Topology Sort
+### Topology Sort
 - [1005_ACM Craft](https://www.acmicpc.net/problem/1005)
 - [1432_그래프 수정](https://www.acmicpc.net/problem/1432)
 
-## Union-Find
+### Union-Find
 - [3830_교수님은 기다리지 않는다](https://www.acmicpc.net/problem/3830)
 
-## SCC
+### SCC
 - [2150_Strongly Connected Component](https://www.acmicpc.net/problem/2096) (기본)
 
 #### SCC - SAT
 - [11280_2-SAT - 3](https://www.acmicpc.net/problem/11280)
 
-## KMP
+### KMP
 - [1786_찾기](https://www.acmicpc.net/problem/1786) (기본)
 
-## FFT
+### FFT
 - [1067_이동](https://www.acmicpc.net/problem/1067) (기본)
 - [14756_Telescope](https://www.acmicpc.net/problem/14756)
 - [15576_큰 수 곱셈 (2)](https://www.acmicpc.net/problem/15576)
@@ -68,7 +68,7 @@
 <br />
 <br />
 
-# 2. 재밌있었던 문제
+## 2. 재밌있었던 문제
 주로 구현 문제가 재미있는듯
 
 - [1020_디지털 카운터](https://www.acmicpc.net/problem/1020)
