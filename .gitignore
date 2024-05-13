@@ -1,4 +1,10 @@
+# input & output
 input.txt
 output.txt
 tc.txt
+
+# complied file
 *.out
+
+# test folder
+test/
