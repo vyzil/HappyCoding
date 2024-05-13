@@ -4,10 +4,8 @@ Study Algorithms & Solve Problems
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=husask)](https://solved.ac/husask/)
 
-<br />
-<br />
 
-## 공부한 알고리즘 
+## 1. 공부한 알고리즘 
 ### 전략
 - Brute Force
 - Depth First Search (DFS) / Breadth First Search (BFS)
@@ -33,9 +31,8 @@ Study Algorithms & Solve Problems
 - **Fast Feurier Transform (FFT)**
 
 <br />
-<br />
 
-### 공부 계획
+## 2. 공부 계획
 
 어느정도 익숙 -> (공부 중 or 예정)
 
