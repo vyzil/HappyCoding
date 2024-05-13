@@ -25,7 +25,7 @@ Study Algorithms & Solve Problems
 - [1432_그래프 수정](https://www.acmicpc.net/problem/1432) 위상정렬 
 - [1715_카드 정렬하기](https://www.acmicpc.net/problem/1715) 그리디
 - [1786_찾기](https://www.acmicpc.net/problem/1786) KMP (기본)
-- [1967_트리의 지름](https://www.acmicpc.net/problem/1167) 다익스트라 (1167과 비교해보기)
+- [1967_트리의 지름](https://www.acmicpc.net/problem/1967) 다익스트라 (1167과 비교해보기)
 - [2096_내려가기](https://www.acmicpc.net/problem/2096) DP (Easy)
 - [2150_Strongly Connected Component](https://www.acmicpc.net/problem/2096) SCC (기본)
 - [2225_합분해](https://www.acmicpc.net/problem/2225) DP (Easy)
@@ -54,4 +54,4 @@ Study Algorithms & Solve Problems
 - [5373_큐빙](https://www.acmicpc.net/problem/5373)
 - [9369_암호 깨기](https://www.acmicpc.net/problem/9369)
 - [14066_Kocka](https://www.acmicpc.net/problem/14066)
-- [14479_영우와 ‘갓4’](https://www.acmicpc.net/problem/14679)
+- [14679_영우와 ‘갓4’](https://www.acmicpc.net/problem/14679)
