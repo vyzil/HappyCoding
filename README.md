@@ -4,12 +4,12 @@ Study Algorithms & Solve Problems
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=husask)](https://solved.ac/husask/)
 
-## 풀어볼 문제
+## 0. 풀어볼 문제
 - [9167_도발 봇](https://www.acmicpc.net/problem/9167)
 - [11385_싱크스몰](https://www.acmicpc.net/problem/11385) NTT
 - [19535_ㄷㄷㄷㅈ](https://www.acmicpc.net/problem/19535)
 
-## 공부 정리
+## 1. 알고리즘 및 문제
 
 ### 알고리즘 
 - 그리디, DP, LCS
@@ -45,7 +45,7 @@ Study Algorithms & Solve Problems
 - [29794_엘나스의 용사](https://www.acmicpc.net/problem/29794) 브루트포스
 
 
-## 재밌있었던 문제
+## 2. 재밌있었던 문제
 주로 구현 문제가 재미있는듯
 - [1020_디지털 카운터](https://www.acmicpc.net/problem/1020)
 - [1043_거짓말](https://www.acmicpc.net/problem/1043)
