@@ -7,7 +7,7 @@ Study Algorithms & Solve Problems
 <br />
 <br />
 
-## 알고리즘 
+## 공부한 알고리즘 
 ### 전략
 - Brute Force
 - Depth First Search (DFS) / Breadth First Search (BFS)
@@ -26,7 +26,8 @@ Study Algorithms & Solve Problems
     + **SAT-2**
 
 ### 문자열 관련
-- **KMP**, **Aho-Corasick**
+- **KMP**
+- **Aho-Corasick**
 
 ### 수학 관련
 - **Fast Feurier Transform (FFT)**
@@ -34,7 +35,7 @@ Study Algorithms & Solve Problems
 <br />
 <br />
 
-## 공부 계획
+### 공부 계획
 
 어느정도 익숙 -> (공부 중 or 예정)
 
