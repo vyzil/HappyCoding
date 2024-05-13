@@ -1,0 +1,21 @@
+# 0001.C 
+연결리스트로 삽입정렬 + 이분탐색 > 시간초과
+
+# 0002.c 부터는 Trie 구조로 해보기..
+
+5 10
+baekjoononlinejudge
+startlink
+codeplus
+sundaycoding
+codingsh
+baekjoon
+star
+start
+code
+sunday
+coding
+cod
+online
+judge
+plus

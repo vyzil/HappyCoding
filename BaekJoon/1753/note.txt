@@ -1,0 +1,96 @@
+# 
+===================
+
+4 8
+
+1
+
+1 2 3
+
+2 1 5
+
+4 3 4
+
+2 3 10
+
+1 3 10
+
+2 4 1
+
+3 1 1
+
+1 2 2
+
+정답
+
+0
+
+2
+
+7
+
+3
+
+
+
+
+# 
+
+    printf("\n[DEBUG] Print Graph ************\n");
+    for(i = 0; i < iV; i++){
+        printf("%d : ", i);
+        curNode = root[i];        
+        while(curNode->next) {
+            printf("%d(%d) ", curNode->next->dst, curNode->next->len);
+            curNode = curNode->next;
+        }
+        printf("\n");
+    }
+    printf("[DEBUG] Print Graph - END ******\n\n");
+
+
+    printf("Queue (%d): Delete\n", qLastIdx);
+    for(j = 0; j <= qLastIdx; j++) printf("(%d, %d) ", priorityQ[j].idx, priorityQ[j].len);
+    printf("\n\n");
+    curIdx = priorityQ[0].idx;
+
+
+
+
+# 우선순위 큐
+일단 minValue
+그리고 visited
+
+# 최단경로
+시작지점 있으므로,
+Input은 Linked List로 정리
+우선순위 Q
+
+# 
+출발점을 우선순위 Q에 넣음
+Linked List 보고 DP update
+update 되면 우선순위 Q에 넣음
+우선순위는 거리 기준이며, 해당 index를 알고있어야함.
+
+# 
+Queue를 위한 struct 생성 필요
+index
+length
+
+어차피 구현은 array로,
+
+[0]
+[1]
+[2]         [3]
+[4][5]      [6][7]
+
+2n , 2n+1
+
+queueLast 의 indx 번호를 저장해야함
+
+# 두 정점 사이에 여러개의 간선
+-> 1. scan하면서 확인 ( 시간복잡도 증가 )
+-> 2. 400,000,000 짜리 Array ( 메모리 초과 )
+
+
+

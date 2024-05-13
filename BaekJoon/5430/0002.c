@@ -4,27 +4,38 @@
 void solve(){
     int i, iN;
     int start, end, isRev;
-    int *iArr, dCount;
+    int *iArr, dCount, rCount, funcIdx;
     char iFunc[100001], iC;
-
-    scanf("%s", iFunc);
-    scanf("%d", &iN);
-
+  
     dCount = 0;
-    for(i = 0; iFunc[i]; i++){
-        if(iFunc[i] == 'D') dCount++;
-        if(dCount > iN) {
-            printf("error\n");
-            do scanf("%c", &iC); 
-            while(iC != ']');
-            return;
+    rCount = 0;
+    funcIdx = 0;
+    do scanf("%c", &iC); 
+    while( !(iC == 'R' || iC == 'D') );
+    while( iC == 'R' || iC == 'D' ){
+        if(iC == 'D') {
+            if(rCount) {
+                iFunc[funcIdx++] = 'R';
+                rCount = 0;
+            }
+            iFunc[funcIdx++] = 'D';
+            dCount++;
         }
+        else rCount = (1 - rCount);
+        scanf("%c", &iC);
+    }
+    if(rCount) iFunc[funcIdx++] = 'R';
+    iFunc[funcIdx] = '\0';
+    
+    scanf("%d", &iN);
+    if(dCount > iN) {
+        printf("error\n");
+        return;
     }
 
     iArr = (int*)malloc(sizeof(int)*iN);
     do scanf("%c", &iC); 
     while(iC != '[');
-    
     for(i = 0; iC != ']'; i++) {
         scanf("%d", iArr + i);
         scanf("%c", &iC);

@@ -1,0 +1,33 @@
+# 
+
+# 0002.c 코드
+반례 ) 
+abcababcabab
+abcabab
+
+-> pattern 을 못잡음
+abcabab
+0001200
+보니까, 패턴 파악 문장에서도 0001 반례와 비슷하게..
+KMP 내가 그냥 다시 짜자
+
+
+# 0001.c 코드
+반례 ) 
+AAA
+A
+-> AA 에서 count 증가 후, 다시 앞A를 매칭해야하는데, while문 때문에 매칭이 안됨
+ 
+ ABCDABD
+ 0123010   
+[|||||||]
+        ABC ABCDAB ABCDABCDABDE
+        
+
+
+ABC ABCDAB ABCDABCDABDE
+ABCDABD
+
+1
+16
+ABABCABABABC

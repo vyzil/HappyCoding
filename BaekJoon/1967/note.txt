@@ -1,0 +1,38 @@
+# 다시 구현해보자.. DFS..?
+
+
+# 0003.c
+근데 문제의 알고리즘 분류가 DFS?
+
+0001.c의 방식은 그대로, general 하게?
+
+childNode를 연결리스트로 잇기
+-> Parent 까지의 weight를 저장해야할듯 (그게 한개니까)
+
+1-1. Left 있으면 go
+1-2. Right 있으면 go
+1-3. 둘 다 없으면,
+    Parent->firstMax, Parent->secondMax 업데이트
+
+
+
+
+
+# 0002.c 로 다시시작
+다익스트라 두번으로 일단 해결
+
+
+# 01 생각 -> Wrong... 이진트리가 아니었음...ㅠㅠ
+
+트리
+부모 노드 
+-> 한쪽 쭉 가중치중 최고    oneMax                      // nMax
+-> 나를 root로  하는 경로 최고 -> child의 oneMax 합     // pMax
+
+순회
+left 있으면 선택 없으면 right 
+
+curNode
+1-1. left 있으면 go
+1-2. right 있으면 go
+1-3. 둘다 없으면 parent->본인 = Null; 본인 free

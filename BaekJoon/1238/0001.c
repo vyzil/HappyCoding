@@ -7,13 +7,13 @@ typedef struct NODE{
     int end;
     int time;
     struct NODE * next;
-} node;
+} NODE;
 
-void dijkstra(node** graphArr, int start, int size, int* dijk){
+void dijkstra(NODE** graphArr, int start, int size, int* dijk){
     int i, j;
     int min, *checked, curIdx; 
     int curTime;
-    node *curNode;
+    NODE *curNode;
 
     checked = (int*)calloc((size+1), sizeof(int));
     for(i = 0; i < size+1; i++) dijk[i] = TMAX;
@@ -45,30 +45,30 @@ int main(void){
     int i;
     int iN, iM, iX;
     int iStart, iEnd, iTime;
-    node **roadArr, **reverseArr, *newNode1, *newNode2;
+    NODE **roadArr, **reverseArr, *newNode1, *newNode2;
     int *dijkXN, *dijkNX;
     int res;
 
     scanf("%d %d %d", &iN, &iM, &iX);
 
-    roadArr = (node**)malloc(sizeof(node*)*(iN+1));
-    reverseArr = (node**)malloc(sizeof(node*)*(iN+1));
+    roadArr = (NODE**)malloc(sizeof(NODE*)*(iN+1));
+    reverseArr = (NODE**)malloc(sizeof(NODE*)*(iN+1));
     for(i = 0; i <= iN; i++) {
-        roadArr[i] = (node*)malloc(sizeof(node));
-        reverseArr[i] = (node*)malloc(sizeof(node));
+        roadArr[i] = (NODE*)malloc(sizeof(NODE));
+        reverseArr[i] = (NODE*)malloc(sizeof(NODE));
         roadArr[i]->next = NULL;
         reverseArr[i]->next = NULL;
     }
     for(i = 0; i < iM; i++){
         scanf("%d %d %d", &iStart, &iEnd, &iTime);
 
-        newNode1 = (node*)malloc(sizeof(node));
+        newNode1 = (NODE*)malloc(sizeof(NODE));
         newNode1->end = iEnd;
         newNode1->time = iTime;
         newNode1->next = roadArr[iStart]->next;
         roadArr[iStart]->next = newNode1;       
 
-        newNode2 = (node*)malloc(sizeof(node));
+        newNode2 = (NODE*)malloc(sizeof(NODE));
         newNode2->end = iStart;
         newNode2->time = iTime;
         newNode2->next = reverseArr[iEnd]->next;

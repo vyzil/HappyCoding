@@ -1,0 +1,27 @@
+#01
+삽입정렬 with Linked List
+-> char Array로 변경
+-> BruteForce
+
+
+
+
+// debug    
+for(curNode = rootNode->next; curNode; curNode = curNode->next) printf("%c ", curNode->alphabet);
+printf("\n");
+
+
+acis
+acit
+aciw
+acst
+acsw
+actw
+aist
+aisw
+aitw
+astw
+cist
+cisw
+citw
+istw

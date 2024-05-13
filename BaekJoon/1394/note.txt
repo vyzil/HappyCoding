@@ -1,0 +1,35 @@
+경우의 수 Counting
+
+# 01
+Input Size 
+Output Size 
+비교, 예를 들어, Output Size가 4면
+3까지 경우의수는 수학적으로 계산
+4부터 정확하게,
+abcdef
+dxxx 
+이면 output 3인 경우의수
+1 -> n개
+2 -> n*n 개
+3 -> n*n*n 개
+4 -> a부터 시작이므로 3 경우의 수 * 3개부터 시작
+
+# 
+abcdefghijklmnopqrstuvwxyz  (26)
+ak                          (2)
+
+## 01
+Input : 
+abcdefghijklmnopqrstuvwxyz
+ak
+
+Output : 
+37
+
+## 02 
+Input : 
+abcdefghijklmnopqrstuvwxyz
+ayfcr
+
+Output : 
+0

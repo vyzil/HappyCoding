@@ -1,0 +1,15 @@
+# 01
+for 문 두개로 bruteforce 하면 되지 않을까?
+arr[row] = col 느낌의 array를 두고 checking DFS 방식으로, 끝까지 가면 count ++
+
+돌아와야하는데,, -> stack을 사용해야 할듯
+
+ex)
+1 3 5 2 6 7 0
+
+    1 2 3 4 5
+1   o o o o o
+2   o o o o o
+3   o o o o o
+4   o o o o o
+5   o o o o o

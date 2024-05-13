@@ -1,3 +1,39 @@
+# 
+xybbbbaxyaxybbaxyaxybbbbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybb
+xybbbbaxyaxybbaxyaxybbbbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybb
+xybbbbaxyaxybbaxyaxybbbbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybb
+bcyabcxabcyabczabczab
+bcyabcxabcyabczabczab
+
+americamericamericamericamericameri
+americamericamericamericamericameri
+
+
+topcoder------------
+topcoder------------
+
+# 
+Pattern
+$$12$5
+2456
+
+# 
+완전트리
+
+트리 확장 횟수는 1,000,000,000 번, but 전부 할 필요는 없긴함
+
+아무튼 제일 왼쪽 트리부터 그려나가면서 min ~ max가 포함될 때까지 하면 됨.
+
+
+$x$y$z$
+
+1 : abcxabcyabczabc
+2 : abcxabcyabczabcxabcxabcyabczabcyabcxabcyabczabcz
+
+
+depth : strSize
+1     : 
+
 
 # 점화식)
 A_(n+1) = A_n * a + b
@@ -10,8 +46,18 @@ A_0 * a^k + {(a^k - 1) / (a - 1)} * b 점화식 있긴 한데 금방 범위 넘�
 
 
 
-1b9ac9ff 29 2 0 20000000 
-10000000
 
-xybbbbaxyaxybbaxyaxybbbbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybb
-xybbbbaxyaxybbaxyaxybbbbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybbbbbbaxyaxybbaxyaxybbbbaxyaxybbaxyaxybb
+
+
+---
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+1000000000
+1000000000 1000000000
+
+
+---
+12
+$3$
+100
+1000000000 1000000099

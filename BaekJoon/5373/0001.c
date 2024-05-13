@@ -2,11 +2,12 @@
 #include <stdlib.h>
 
 /* 
- * Position = [S]ide << 3 + Index
- *     ___ ___ ___
- *    |_0_|_1_|_2_|
- *    |_7_|_X_|_3_|
- *    |_6_|_5_|_4_|
+ *  Position = [S]ide << 3 + [I]ndex
+ *       ___                  
+ *   ___|_U_|___     ___ ___ ___
+ *  |_L_|_F_|_R_|   |_0_|_1_|_2_|
+ *      |_D_|       |_7_|_X_|_3_|
+ *      |_B_|       |_6_|_5_|_4_| 
  * 
  *  [U]p   [D]own [F]ront 
  *  [B]ack [L]eft [R]ight
@@ -31,12 +32,14 @@ int Rotate[R_NUM][S_NUM][I_NUM];
 void calcSideRotate(int method, int side[4], int start[4]){
     int i, j;
     int wise;
+
     wise = method / S_NUM == 1 ? -1 : 1;
     for(i = 0; i < 4; i++){        
         for(j = 0; j < 3; j++){
             Rotate[method][side[i]][(start[i] + j) % I_NUM] = POS(side[(i+wise+4)%4], (start[(i+wise+4)%4] + j) % I_NUM);
         }
     }
+
     return;    
 }
 
@@ -58,37 +61,37 @@ void calcRotate(){ // inverse : (+) <-> (-)
     }
 
     // 3. side rotate
-    // U
+    // U+-
     side [0] = F; side [1] = L; side [2] = B; side [3] = R;
     start[0] = 0; start[1] = 0; start[2] = 4; start[3] = 0;
     calcSideRotate(U , side, start);
     calcSideRotate(U + S_NUM , side, start);
 
-    // D
+    // D+-
     side [0] = B; side [1] = L; side [2] = F; side [3] = R;
     start[0] = 0; start[1] = 4; start[2] = 4; start[3] = 4;
     calcSideRotate(D , side, start);
     calcSideRotate(D + S_NUM , side, start);
 
-    // F
+    // F+-
     side [0] = D; side [1] = L; side [2] = U; side [3] = R;
     start[0] = 0; start[1] = 2; start[2] = 4; start[3] = 6;
     calcSideRotate(F , side, start);
     calcSideRotate(F + S_NUM , side, start);
 
-    // B
+    // B+-
     side [0] = U; side [1] = L; side [2] = D; side [3] = R;
     start[0] = 0; start[1] = 6; start[2] = 4; start[3] = 2;
     calcSideRotate(B , side, start);
     calcSideRotate(B + S_NUM , side, start);
 
-    // L
+    // L+-
     side [0] = D; side [1] = B; side [2] = U; side [3] = F;
     start[0] = 6; start[1] = 6; start[2] = 6; start[3] = 6;
     calcSideRotate(L , side, start);
     calcSideRotate(L + S_NUM , side, start);
 
-    // R
+    // R+-
     side [0] = D; side [1] = F; side [2] = U; side [3] = B;
     start[0] = 2; start[1] = 2; start[2] = 2; start[3] = 2;
     calcSideRotate(R , side, start);
@@ -112,12 +115,12 @@ void cubing(){
     for(pos = iN-1; pos >= 0 ; pos--){
         scanf("%s", iRot);
         switch(iRot[0]) {
-            case 'U': curMethod = U; break;
-            case 'D': curMethod = D; break;
-            case 'F': curMethod = F; break;
-            case 'B': curMethod = B; break;
-            case 'L': curMethod = L; break;
-            case 'R': curMethod = R; break;
+            case 'U': curMethod = 0; break;
+            case 'D': curMethod = 1; break;
+            case 'F': curMethod = 2; break;
+            case 'B': curMethod = 3; break;
+            case 'L': curMethod = 4; break;
+            case 'R': curMethod = 5; break;
             default : curMethod = -1; break;
         }
         if(iRot[1] == '+') curMethod += S_NUM;
@@ -147,7 +150,7 @@ int main(void){
     int i;
     int iT;
 
-    calcRotate();
+    calcRotate();    
 
     scanf("%d", &iT);
     while(iT--) cubing();

@@ -1,0 +1,9 @@
+Linked List,
+그냥 삭제(삽입 x)
+그리고, 삽입된 애들 중에서 젤 작은 숫자만 홀드
+
+
+수열 중에
+오름차순인 애들 (a), 순서 안맞는 애들 (b)
+
+a  b a b a  b a b a b a b  a a a b a b a b a a b  a

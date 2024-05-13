@@ -5,106 +5,94 @@
 #define ll long long
 
 int main(void){
-    int i, idx; char iStr[51]; char dStr[51];
+    int i, j; char iStr[51]; char dStr[51];
     int execNum, min, max;
-    int iStrSize, dStrSize, dSize, rSize;
-    int *treeIdxArr, curNum, curChunk, height, carry;
-    ll *expandCache; int cacheSize;
+    int iStrSize, dStrSize, dSize, rSize; ll strSize;
+    int pattern[50] = {0}, patSize, idx; // pattern : accumulate
+    int *treeIdxArr, curNum, curChunk, height;
+    ll *strLenArr, lenArrSize;
  
     // input
     scanf("%s", iStr);
     scanf("%s", dStr);
     scanf("%d", &execNum);
     scanf("%d %d", &min, &max);
-    iStrSize = strlen(iStr); dStrSize = strlen(dStr);
+    iStrSize = strlen(iStr); dStrSize = strlen(dStr); strSize = iStrSize;
 
     // Calc Meta Data : pattern, count $, count rest
     dSize = 0;    
     idx = 0;
     for(i = 0; i < dStrSize; i++) {
-        if(dStr[i] == '$') dSize++; 
+        if(dStr[i] == '$') {
+            if(pattern[idx] > 0) idx++;
+            dSize++; 
+            idx++;
+        }
+        else pattern[idx]++;
     }
+    if(pattern[idx] > 0) idx++;
+    pattern[idx] = -1;
+    patSize = idx;
+    for(i = 0; i < patSize+1; i++) printf("%d ", pattern[i]); printf("\n");
 
     rSize = dStrSize - dSize;
 
     if(dSize == 1){
-        expandCache = (ll*)malloc(sizeof(ll)*1);
-        if(((max - iStrSize) / rSize) + 1 < execNum) expandCache[0] = max;
-        else expandCache[0] = iStrSize + rSize * execNum;
+        strLenArr = (ll*)malloc(sizeof(ll)*1);
+        strLenArr[0] = iStrSize + (dStrSize - 1) * execNum;
         for(i = min - 1; i < max && i < iStrSize; i++) printf("%c", iStr[i]);
-        for(; i < max && (ll)i < expandCache[0]; i++) printf("%c", dStr[((i - iStrSize) % (dStrSize-1))  + 1]);
+        for(j = 0; i < max && i < (int)strLenArr[0]; i++, j++) printf("%c", dStr[(j % (dStrSize-1))  + 1]);
         for(;i < max ; i++) printf("-");
         printf("\n");
         goto finale;
     }
 
     // Calculate Tree Size with Depth
-    for(cacheSize = 2; ((ll)1 << (cacheSize - 1)) < (ll)max; cacheSize++);
-    
-    expandCache = (ll*)malloc(sizeof(ll)*cacheSize);
-    expandCache[0] = iStrSize;    
-    for(i = 1; i < cacheSize; i++){
-        expandCache[i] = expandCache[i-1] * dSize + rSize;
-        if(expandCache[i] > (ll)max) {   
-            if (execNum > i) execNum = i;         
-            cacheSize = i + 1;
+    for(lenArrSize = 0; (1 << lenArrSize) < max; lenArrSize++); lenArrSize++;
+    strLenArr = (ll*)malloc(sizeof(ll)*(lenArrSize + 1));
+    strLenArr[0] = iStrSize;    
+    for(i = 1; i < execNum; i++){
+        strLenArr[i] = strLenArr[i-1] * dSize + rSize;
+        if(strLenArr[i] > (ll)max) {            
+            lenArrSize = i + 1;
             break;
         }
     }
-    expandCache = realloc(expandCache, sizeof(ll)*cacheSize);
 
     // Calculate treeIdx of min
-    treeIdxArr = (int*)malloc(sizeof(int)*cacheSize);
-    for(i = 0; i < cacheSize; i++) treeIdxArr[i] = 0;
+    treeIdxArr = (int*)malloc(sizeof(int)*lenArrSize);
+    for(i = 0; i < lenArrSize; i++) treeIdxArr[i] = 0;
     
     curNum = min - 1;
-    idx = cacheSize - 1;
-    while(curNum > 0){
-        while((ll)curNum < expandCache[idx-1] && idx > 0) idx--;
-        if(idx <= 0) break;
-        while(curNum > 0 && idx > 0){
-            if(dStr[treeIdxArr[idx]] == '$') {
-                curChunk = expandCache[idx-1];
-                if(curNum < curChunk) break;
-                treeIdxArr[idx]++;
-            }
-            else if(('a' <= dStr[treeIdxArr[idx]]) && (dStr[treeIdxArr[idx]] <= 'z')) {
-                curChunk = 1;
-                treeIdxArr[idx]++;
-            }
-            else curChunk = 0;
+    idx = lenArrSize - 1;
+    while(curNum > 0 && idx >= 0){
+        while(curNum < strLenArr[idx] && idx >= 0) idx--;
+        while(idx >= 0){
+            if (pattern[treeIdxArr[idx]] == 0) curChunk = strLenArr[idx];
+            else curChunk = pattern[treeIdxArr[idx]];            
+            if(curNum - curChunk < 0 || curChunk < 0) break;
+            printf("\t%d %d\n", curNum, curChunk);
             curNum -= curChunk;
+            treeIdxArr[idx]++;
         }
     }
-    treeIdxArr[idx] += curNum;
+    printf("curNum = %d\n", curNum);
+    for(i = 0; i < lenArrSize; i++) printf("%d ", treeIdxArr[i]); printf("\n");
 
     // Print from min to max
-    carry = 0;
-    for(i = min - 1; i < max && (ll)i < expandCache[execNum]; i++){
-        height = execNum;
-        while(height > 0 && dStr[treeIdxArr[height]] == '$') height--;
-        if(height == 0) {
-            printf("%c", iStr[treeIdxArr[height]]);
-            if(++(treeIdxArr[height]) >= iStrSize) carry = 1;
-        }
-        else {
-            printf("%c", dStr[treeIdxArr[height]]);
-            if(++(treeIdxArr[height]) >= dStrSize) carry = 1;
-        }
+    for(height = lenArrSize - 1;;){
+        while(pattern[treeIdxArr[height]] == 0 && height >= 0) height--;
+        if(height < 0) printf("%c", iStr[curNum]);
+        else printf("%c", )
 
-        while(carry){
-            treeIdxArr[height] = 0;
-            height++;
-            treeIdxArr[height]++;
-            if(treeIdxArr[height] < dStrSize) carry = 0;
-        }
     }
-    for(; i < max; i++) printf("-");
-    printf("\n");
 
-    free(treeIdxArr);
+    for(i = min; i < max; i++){
+
+    }
+
 finale:
-    free(expandCache);
+    free(strLenArr);
     return 0;
 }
 

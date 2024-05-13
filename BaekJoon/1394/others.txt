@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <unistd.h>
+
+static constexpr inline unsigned asd(unsigned n) {
+    constexpr unsigned N = sizeof(unsigned) * 8;
+    unsigned t1 = (unsigned long)706098332 * (unsigned long)n >> N;
+    unsigned q = t1 + (n - t1 >> 1) >> 19;
+    return n - q * 900528U;
+}
+
+int main() {
+    struct stat st;fstat(0,&st);
+    char*buf=(char*)mmap(NULL,st.st_size,PROT_READ,MAP_SHARED,0,0);
+    unsigned sz=0;unsigned char*to_id=(unsigned char*)&st;
+    for (;buf[sz]!=10;++sz)to_id[buf[sz]]=sz+1;
+    const char*cyp=buf+sz;unsigned x=1,res=0;
+    const char*p=cyp;while(*++p!=10);--p;
+    for (; p > cyp; --p) {
+        res += to_id[*p] * x; res = asd(res);
+        x *= sz; x = asd(x);
+    }
+    unsigned char*p2=to_id+10;size_t cnt=0;
+    do*p2--=res%10+'0',++cnt;while(res/=10);
+    write(1,p2+1,cnt);
+}

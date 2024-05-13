@@ -1,37 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+#define N_MAX 100000
+
 typedef struct _NODE{
     int root;
     int height;
     int weight; 
 } NODE;
 
-int* stack;
-int stackTop;
+int g_stack[N_MAX];
+int g_stackTop;
 
 int findRoot(NODE* ROOT, int num){
     int root;
     int curIdx, weightSum;
 
-    stackTop = -1;
+    g_stackTop = -1;
     curIdx = num;
 
     // find root while counting height
     while(ROOT[curIdx].root != curIdx) {
-        stack[++stackTop] = curIdx;
+        g_stack[++g_stackTop] = curIdx;
         curIdx = ROOT[curIdx].root;
     }
     root = ROOT[curIdx].root;
-    if(ROOT[root].height < stackTop + 1) ROOT[root].height = stackTop + 1;
+    ROOT[root].height = g_stackTop + 1;
 
     // update passed nodes' root value to root
     weightSum = 0;
-    while(stackTop >= 0){
-        weightSum += ROOT[stack[stackTop]].weight;
-        ROOT[stack[stackTop]].root = root;
-        ROOT[stack[stackTop]].weight = weightSum;
-        stackTop--;
+    while(g_stackTop >= 0){
+        weightSum += ROOT[g_stack[g_stackTop]].weight;
+        ROOT[g_stack[g_stackTop]].root = root;
+        ROOT[g_stack[g_stackTop]].weight = weightSum;
+        g_stackTop--;
     }
 
     return root;
@@ -40,22 +43,20 @@ int findRoot(NODE* ROOT, int num){
 int solve(int N, int M){
     int i;
     char query; int iA, iB, iW;
-    NODE* ROOT;
+    NODE ROOT[N_MAX];
     int ARoot, BRoot, w_AR, w_BR;
 
     if((N || M) == 0) return 0;
 
-    ROOT = (NODE*)malloc(sizeof(NODE)*N);
     for(i = 0; i < N; i++) {
         ROOT[i].root = i;
         ROOT[i].height = 0;
         ROOT[i].weight = 0;
     }
-    stack = (int*)malloc(sizeof(NODE)*N);
 
     for(i = 0; i < M; i++){
         scanf("%s", &query);
-        if(query == '!'){ // add tree
+        if(query == '!'){ // add
             scanf("%d %d %d", &iA, &iB, &iW);
             iA--; iB--;
             ARoot = findRoot(ROOT, iA);
@@ -73,7 +74,7 @@ int solve(int N, int M){
                 ROOT[ARoot].weight = iW - w_AR + w_BR;
             }
         }
-        else if(query == '?'){ // search tree
+        else if(query == '?'){ // search
             scanf("%d %d", &iA, &iB);
             iA--; iB--;
             ARoot = findRoot(ROOT, iA);
@@ -83,8 +84,6 @@ int solve(int N, int M){
         }
     }
 
-    free(stack);
-    free(ROOT);
     return 1;
 }
 

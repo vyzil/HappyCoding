@@ -14,20 +14,14 @@ void solve(){
     int count, idx, check;
     char **encStrList, decStr[STR_MAX], query[STR_MAX];
     int  decPattern[STR_MAX];
-    char patDict[ALPHABET];
-    char *tmpDict;
-    char *encDict;
+    char checkStr[STR_MAX];
+    char tmpDict[ALPHABET];
     char decDict[ALPHABET];
-    char *swap;
     int  strSize;
     int match;
 
-    tmpDict = (char*)malloc(sizeof(char)*ALPHABET);
-    encDict = (char*)malloc(sizeof(char)*ALPHABET);
-    for(i = 0; i < ALPHABET; i++) {
-        patDict[i] = 0;
-        encDict[i] = 0;
-    }
+    for(i = 0; i < STR_MAX; i++) checkStr[i] = 0;
+    for(i = 0; i < ALPHABET; i++) tmpDict[i] = 0;
 
     // Input
     scanf("%d", &iN);
@@ -43,8 +37,8 @@ void solve(){
     // Analyze decStr Pattern
     count = 1;
     for(i = 0; i < strSize; i++){
-        if(patDict[atoi(decStr[i])] == 0) patDict[atoi(decStr[i])] = count++;
-        decPattern[i] = patDict[atoi(decStr[i])];
+        if(tmpDict[atoi(decStr[i])] == 0) tmpDict[atoi(decStr[i])] = count++;
+        decPattern[i] = tmpDict[atoi(decStr[i])];
     }
 
     // Analyze encStrList Pattern 
@@ -53,22 +47,17 @@ void solve(){
     for(i = 0; i < iN; i++){
         if(strlen(encStrList[i]) != strSize) continue;
         count = 1;
-        for(j = 0; j < ALPHABET; j++) {
-            patDict[j] = 0;
-            tmpDict[j] = 0;
-        }
+        for(j = 0; j < ALPHABET; j++) tmpDict[j] = 0;
         for(j = 0; j < strSize; j++){
-            if(patDict[atoi(encStrList[i][j])] == 0) patDict[atoi(encStrList[i][j])] = count++;
-            if(decPattern[j] != patDict[atoi(encStrList[i][j])]) break;
-            if(encDict[atoi(decStr[j])] == 0) tmpDict[atoi(decStr[j])] = encStrList[i][j];
-            else if(encDict[atoi(decStr[j])] != encStrList[i][j]) tmpDict[atoi(decStr[j])] = -1;
-            else tmpDict[atoi(decStr[j])] = encDict[atoi(decStr[j])];
+            if(tmpDict[atoi(encStrList[i][j])] == 0) tmpDict[atoi(encStrList[i][j])] = count++;
+            if(decPattern[j] != tmpDict[atoi(encStrList[i][j])]) break;
         }
         if(j < strSize) continue;
         match = 1;
-        swap = encDict;
-        encDict = tmpDict;
-        tmpDict = swap;
+        for(j = 0; j < strSize; j++){
+            if(checkStr[j] == 0) checkStr[j] = encStrList[i][j];
+            else if(checkStr[j] != encStrList[i][j]) checkStr[j] = -1;
+        }
     }
 
     if(match == 0) {
@@ -77,9 +66,9 @@ void solve(){
     }
 
     for(i = 0; i < ALPHABET; i++) decDict[i] = '?';
-    for(i = 0; i < ALPHABET; i++) {
-        if(encDict[i] <= 0) continue;        
-        decDict[atoi(encDict[i])] = 'a' + i;
+    for(i = 0; i < strSize; i++) {
+        if(checkStr[i] <= 0) continue;
+        else decDict[atoi(checkStr[i])] = decStr[i];
     }
     // case : if 25 alphabet is known
     count = 0;
@@ -93,7 +82,7 @@ void solve(){
             if(decDict[i] == '?') idx = i;
             else check |= (1 << atoi(decDict[i]));
         }
-        check = (1 << ALPHABET) - check - 1;
+        check = (1 << ALPHABET) - check;
         for(i = 0; (check >> i) > 1 ; i++);
         decDict[idx] = 'a' + i;
     }
@@ -107,8 +96,6 @@ void solve(){
 solve_finale:
     for(i = 0; i < iN; i++) free(encStrList[i]);
     free(encStrList);
-    free(encDict);
-    free(tmpDict);
 
     return;
 }

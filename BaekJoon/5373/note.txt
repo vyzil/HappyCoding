@@ -1,0 +1,46 @@
+# 생각
+
+큐브의 초기 값을 전부 암 (모든 위치의 값)
+
+따라서 마지막에 앞면인 부분을 역추적 하면 됨
+
+arr1D
+0 1 2 3 4 5 6 7 8
+x x x x x x x x x
+
+
+                    큐브 면 수 (54)
+
+
+큐브 전환 방법 수
+ (2 * 6)
+
+
+ 이런 2차원 arr2D 만들어서
+
+ 전환 방법이 주어지면 
+ arr1D[i] = [방법][arr1D[i]] -> for (0 ~ 8) 
+ 하면 될듯
+
+ 그렇게 해서 연추적한 위치의 초기 색깔 출력
+
+ 
+
+
+
+=======================================
+void printRotate(){
+    int i, j, k;
+    for(i = 0; i < R_NUM; i++){
+        printf("%d\n", i);
+        for(j = 0; j < S_NUM; j++){
+            printf("\t%d : \n", j);
+            for(k = 0; k < I_NUM; k++){
+                printf("\t\t(%c, %d to %c, %d)\n", Color[j], k, Color[Rotate[i][j][k] / 8], Rotate[i][j][k] % 8);
+            }
+        }
+
+    }
+
+    return;
+}

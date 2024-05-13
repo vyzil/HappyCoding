@@ -1,12 +1,36 @@
-problem_num="$1"
 
-if [ -z "$problem_num" ]; then
-    echo "usage : $0 <problem_number>"
-    exit 1
-fi
+check_if_numeric() {
+    if [[ ! $filename =~ ^[0-9]+$ ]]; then
+        return 1
+    fi
+}
 
-mkdir "$problem_num"
-cd "$problem_num" || exit
-touch 0001.c note.txt input.txt
-code 0001.c note.txt input.txt
-echo "Lets Coding!"
+main() {
+
+    if [ -z "$1" ]; then     
+        echo "usage : $0 <problem_number>"   
+        return 1
+    fi
+
+    file_name=$(basename "$1")
+
+    check_if_numeric "$filename"
+
+    if [ $# -ne 1 ]; then
+        echo "usage : $0 <problem_number>"
+        return 1
+    fi
+ 
+    if [ ! -e $file_name ]; then
+        mkdir "$file_name"
+    fi
+
+    if [ -e "$file_name" ]; then
+        cd "$file_name"
+        touch 0001.c note.txt input.txt
+        code 0001.c note.txt input.txt
+        echo "Happy Coding!"
+    fi
+}
+
+main "$1"

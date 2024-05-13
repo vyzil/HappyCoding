@@ -1,5 +1,60 @@
+
+mtahovcjqxels
+irajsbkticlur
+gnubipwdgkryf
+
+aboringsample
+rbunyfka
+
+
+
+
+m t a h o v c j q x e l s
+a b o r i n g s a m p l e 
+a 에서 탈락
+
+i r a j s b k t i c l u r
+a b o r i n g s a m p l e 
+
+r에서 탈락
+i -> a
+
+
+g n u b i p w d g k r y f
+a b o r i n g s a m p l e 
+
+g -> a 
+
+즉 패턴 기반,
+같은 단어는 같은 위치에 있어야함.
+
+
+
+
+g n u b i p w d g k r y f
+a b o r i n g s a m p l e 
+
+r b u n y f k a
+p r o b l e m ?
+
+주어진 목록에서 둘 이상의 암호문이 해독문에 대응될 수 있어 어떤 암호문으로부터 알파벳 암호화 표를 작성해야 할 지 알 수 없는 경우에도, 일부 문자는 해독 가능할 수 있음에 유의하라.(예제 3)
+
+
+즉, matching 이 여러개 되면, 동일 한 것만 추려내야함
+
+
+problem?
+IMPOSSIBLE
+m?sa???
+
+problem?
+IMPOSSIBLE
+m?sa???
+
 1
 1
 abcdefghijklmnopqrstuvwxy
-bcdefghijklmnopqrstuvwxyz
-zyxwvutsrqponmlkjihgfedcba
+abcdefghijklmnopqrstuvwxy
+z
+
+a�ccd��

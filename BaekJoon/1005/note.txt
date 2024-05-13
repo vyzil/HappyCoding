@@ -1,0 +1,19 @@
+    // nodeList[i] : num is count
+    // node        : num is building number
+    // queue       : num is Ending Time
+
+
+# 
+nodeList 에서 num은 이전 연결의 갯수로,
+처음에 nodeList 에서 스캔하면서 queue에 넣어줄 때에만 0인지 체크
+
+그 이후에는 queue에서 처리되고 마지막에 자기 다음에 연결된 애들
+next로 쭉 들어가서 count 감소, 만약 0으로 되면 queue에 넣음
+
+# 
+node는 연결리스트로, rootNode의 idx 번호의 빌딩이 끝난 다음에 지을 수 있는
+건물들과 연결되어 있음
+
+#
+queue
+끝나는 시간 기준으로 우선순위 queue.

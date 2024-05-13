@@ -1,0 +1,114 @@
+# 
+일단 0001.c가 통과는 됐는데,
+너무 불쾌한데..
+
+# 
+이 문제 먼저 풀고
+3648번 풀기
+
+기본적으로 dfs, 
+자식 노드의 root중 작은 값으로 자신도 업데이트
+
+
+stack에는 해당 node의 V번호가 필요함
+그래야 DFS 할 때 ChildNode 찾을 수 있음
+그리고 root 필요함
+
+스택에서 다 빠지면 어떤 값이 들어올까?
+-> 연결 안된 값 : search?
+인접리스트에서 체크?
+
+다시)
+스택에 어떤 값을 넣을까 선정 -> visited안한 값
+값을 넣고 dfs 시작 (연결 : child)
+ + 연결된 노드 한개에 대해서 방문안했으면 넣기
+ + 전부 방문 했었거나 없으면, 연결된 노드와 자신 중 root값이 제일 작은걸로 업데이트
+ => 참고로 root값은 증가하면서 dfs가 수행되므로, 작은값으로 업데이트되면 연결되어있음을 나타낼 수 있음
+ + 자기 root 업데이트하면 visited 체크하고 stack에서 빠짐
+
+
+혹시, 자기 root 업데이트 하면 parent도 업데이트 해도 되나?
+자기의 update된 root와 parent 비교해서?
+될듯?
+
+그러면, visited 배열 필요 -> 인접리스트를 활용?
+stack의 구조체에 root 넣기
+
+-> stack에서도 root 값을 확인해야하는데 어디서 볼까...
+인접리스트의 num을
+
+0이면 방문 x, 0 이상이면 root 값을, -1이면 finished로?
+근데 이러면.... 다음 stack 돌 때마다 초기화 해줘야함
+아 근데 어차피 연결된 이상 거기서 찾아지긴해서 노상관임
+
+finished?
+
+finished 된 요소를 다시 접근할 수도 있겠는데?
+-> root update 할 때에는 finished된 요소도 확인해야할듯
+
+
+stack은 IV 번호를 저장
+방문, root 는 인접리스트에 있음
+num 
+-1 : 탐색 완료
+0  : 미방문
+1 이상 : 탐색 중,
+
+
+stack은 index만, 
+내 stack은 pop되지 않음
+대신 bottom을 up해줌
+bottom up은 memory의 stack 비슷하게 ebp같은? 느낌
+
+그러면 ebp기준으로 ssc가 완성됨
+
+
+-> pop은 무조건 되어야함. 중간에 DFS 간 곳에서 혼자 SCC인 노드가 있으면
+빼줘야 업데이트 할 수 있음
+
+finish 하면 iV 로 업데이트 해줘야겠다 그래야 비교가 편함
+
+
+출력이 문제)
+출력은 인단 ssc num을 0부터 시작
+array 만들어서 scc가 만들어질 때마다 ssc num++하면서 진행
+ex)
+0   1   2   3   4   5   6   7   8
+3   3   1   0   2   3   2   3   1
+
+한번 스캔 > 메타데이터 추출 ( array (scc num 알기 떄문) )
+[0]
+ssc num : 3
+시작번호 : 0
+갯수    : 4
+
+
+[1] 
+ssc num : 3
+시작번호 : 2
+갯수    : 2
+
+갯수를 이전까지 누적갯수로 update -> 출력 array의 시작 index
+
+출력 array 만들기 첫 번째 array scan하면서 scc num 확인하고, 
+
+
+
+-----
+
+
+    for(i = 0; i < iV; i++){
+        curNode = &(adjList[i]);
+        printf("%d :", i);
+        while(curNode->next){
+            printf("%d ", curNode->next->num);
+            curNode = curNode->next;
+        }
+        printf("\n");
+    }
+
+
+    printf("%d (%d) Start, root=%d\n", num + 1, id, adjList[num].num);
+
+    printf("%d (%d) End, root=%d\n", num + 1, id, adjList[num].num);
+
