@@ -6,7 +6,6 @@ check_if_numeric() {
 }
 
 main() {
-
     if [ -z "$1" ]; then     
         echo "usage : $0 <problem_number>"   
         return 1
@@ -22,17 +21,10 @@ main() {
     fi
  
 
-    cd unsolved
-
-    if [ ! -e $file_name ]; then
-        mkdir "$file_name"
-    fi
-
-    if [ -e "$file_name" ]; then
-        cd "$file_name"
-        touch 0001.c note.txt input.txt
-        code 0001.c note.txt input.txt
-        echo "Happy Coding!"
+    if [ -d $file_name ]; then
+        mv "$file_name" "../solved/"
+    else
+        echo "No $file_name directory found"
     fi
 }
 
