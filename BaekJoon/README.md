@@ -46,8 +46,11 @@
 ### SCC
 - [2150_Strongly Connected Component](https://www.acmicpc.net/problem/2096) (기본)
 
-#### SCC - SAT
+#### SCC - 2-SAT
 - [11280_2-SAT - 3](https://www.acmicpc.net/problem/11280)
+
+### Segment Tree
+- [2042_구간 합 구하기](https://www.acmicpc.net/problem/2042)
 
 ### KMP
 - [1786_찾기](https://www.acmicpc.net/problem/1786) (기본)

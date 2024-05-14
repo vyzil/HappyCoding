@@ -22,6 +22,7 @@ Study Algorithms & Solve Problems
 - Union-Find
 - **Strongly Connected Component (SCC)**
     + **SAT-2**
+- **Segment Tree**
 
 ### 문자열 관련
 - **KMP**
@@ -34,9 +35,10 @@ Study Algorithms & Solve Problems
 
 ## 2. 공부 계획
 
-어느정도 익숙 -> **공부중 or 예정**
+어느정도 익숙 -> **\[공부중\]** -> \(예정\)
 
-- 다익스트라 -> 플로이드-워셜 -> **벨만-포드**
-- 위상정렬 -> **Union-Find** -> **SCC, SAT**
-- KMP -> **아호-코라식**
+- 다익스트라 -> 플로이드-워셜 -> \(벨만-포드\)
+- 위상정렬 -> **\[Union-Find\]** -> **\[SCC, SAT\]**
+- **\[세그먼트 트리\]**
+- KMP -> \(아호-코라식\)
 - **FFT** -> NTT
