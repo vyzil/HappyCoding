@@ -1,3 +1,7 @@
+## 0. 고민해볼 문제
+
+- [10891_Cactus? Not cactus?](https://www.acmicpc.net/problem/10891) 타잔 알고리즘을 응용해서 풀긴했는 데, 어떻게 풀었는지 정확하게는 모르겠음..
+
 ## 1. 복습할 문제
 
 다시 풀면서 공부할 문제
@@ -44,13 +48,13 @@
 - [3830_교수님은 기다리지 않는다](https://www.acmicpc.net/problem/3830)
 
 ### SCC
-- [2150_Strongly Connected Component](https://www.acmicpc.net/problem/2096) (기본)
+- [2150_Strongly Connected Component](https://www.acmicpc.net/problem/2150) (기본)
 
 #### SCC - 2-SAT
 - [11280_2-SAT - 3](https://www.acmicpc.net/problem/11280)
 
 ### Segment Tree
-- [2042_구간 합 구하기](https://www.acmicpc.net/problem/2042)
+- [2042_구간 합 구하기](https://www.acmicpc.net/problem/2042) (기본)
 
 ### KMP
 - [1786_찾기](https://www.acmicpc.net/problem/1786) (기본)

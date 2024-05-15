@@ -1,0 +1,76 @@
+# Feedback
+복잡도 계산은 안해봤는데,
+우선 TreeSearching이 logN
+Div & conq가 최대 N, 최소 logN
+-> (logN)^2 ~ NlogN 걸림
+
+
+# 0002.c (solve : 5540 KB, 36 ms)
+
+모든 구간의 갯수 : nC2 -> 불가능
+
+분할정복으로?
+전체 구간에서 최솟값 * 구간 하는데,
+최솟값 애 기준 좌, 우 나눠서 또 함 (안나눠 질 때 까지)
+
+문제는 그 최솟값인 애를 어떻게 찾나..
+global 변수로 min, minIdx를 두고 수행?
+-> 안됨, 구간이 전체 포함되면 리턴할 수 도 있음
+
+-> 아예 input을 받고 Tree에서 최소값의 index를 홀딩해야할듯
+---
+범위 안에 없으면 홀딩할 index 값을 N으로 설정하고
+input[N]에 가능한 MAX값 +1을 넣어서
+min으로 N이 선택 안되게 끔만 설정
+
+# 0001.c (실패)
+---
+반례)
+7
+2
+4
+2
+5
+6
+5
+3
+
+정답:15
+
+
+내가 한 방법은 모든 구간에 대해서 서칭이 안됨
+예시에서는 3-5 구간 서칭이..
+
+---
+1 <= N <= 100,000
+
+
+세그트리 기본문제인듯
+
+구간내 최대값 저장,
+구간탐색해서 구간범위만큼 곱
+
+---
+근데 이건 한번만 구하는거라 DP가 맞나?
+범위 내의 최댓값은 DP로는 좀 힘든듯
+
+***
+```
+#define min(a, b) ((a) > (b) ? (b) : (a));
+#define max(a, b) ((a) > (b) ? (a) : (b));
+```
+
+위와 같이 define 하고 a에 함수 call을 넣으면
+두번 호출된다는 것을 명심하자...
+
+Wrong :
+``` 
+min(makeTree(2*idx, start, (start + end)/2), makeTree(2*idx+1, (start + end)/2 + 1, end));
+```
+
+Correct :
+```
+lChild = makeTree(2*idx, start, (start + end)/2);
+rChild = makeTree(2*idx+1, (start + end)/2 + 1, end);
+segTree[idx] = min(lChild, rChild);
+```

@@ -3,7 +3,7 @@
 
 #define ll long long
 
-ll *segTree; int treeSize;
+ll *segTree; int g_treeSize;
 
 ll makeTree(int idx, int start, int end){
     if(start == end) scanf("%lld", &segTree[idx]);
@@ -35,9 +35,9 @@ int main(void) {
 
     scanf("%d %d %d", &N, &M, &K);
 
-    for(treeSize = 1; treeSize < N; treeSize <<= 1);
-    treeSize <<= 1;
-    segTree = (ll*)malloc(sizeof(ll)*treeSize);
+    for(g_treeSize = 1; g_treeSize < N; g_treeSize <<= 1);
+    g_treeSize <<= 1;
+    segTree = (ll*)malloc(sizeof(ll)*g_treeSize);
 
     makeTree(1, 0, N-1);
 
