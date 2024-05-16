@@ -6,7 +6,7 @@ typedef struct _NODE{
     struct _NODE *next;
 } NODE;
 
-NODE *adjList;
+NODE *g_adjList;
 int g_count, *g_update;
 
 int dfs(int curNum, int prevNum){
@@ -14,28 +14,28 @@ int dfs(int curNum, int prevNum){
     NODE *curNode;
 
     curCount = ++g_count;
-    adjList[curNum].num = curCount;
+    g_adjList[curNum].num = curCount;
 
     g_update[curNum] = 0;
-    curNode = &adjList[curNum];
+    curNode = &g_adjList[curNum];
     while(curNode->next){
         nextNum = curNode->next->num;
         if(nextNum != prevNum){
-            if(adjList[nextNum].num == 0) {
+            if(g_adjList[nextNum].num == 0) {
                 if((childRoot = dfs(nextNum, curNum)) == -1) return -1;
             }
             else {
-                childRoot = adjList[nextNum].num;
+                childRoot = g_adjList[nextNum].num;
                 g_update[nextNum]--;    // g_update[nextNum] will be updated later
             }
-            if(childRoot < adjList[curNum].num) adjList[curNum].num = childRoot;    
+            if(childRoot < g_adjList[curNum].num) g_adjList[curNum].num = childRoot;    
             if(childRoot <= curCount) g_update[curNum]++;;
             if(g_update[curNum] > 1) return -1;
         }
         curNode = curNode->next;
     }
 
-    return adjList[curNum].num;
+    return g_adjList[curNum].num;
 }
 
 int main(void){
@@ -45,11 +45,11 @@ int main(void){
     NODE *newNode;
 
     scanf("%d %d", &N, &M);
-    adjList = (NODE*)malloc(sizeof(NODE)*N);
+    g_adjList = (NODE*)malloc(sizeof(NODE)*N);
     g_update = (int*)malloc(sizeof(int)*N);
     for(i = 0; i < N; i++) {
-        adjList[i].num = 0;
-        adjList[i].next = NULL;
+        g_adjList[i].num = 0;
+        g_adjList[i].next = NULL;
     }
 
     for(i = 0; i < M; i++){
@@ -58,13 +58,13 @@ int main(void){
 
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = a;
-        newNode->next = adjList[b].next;
-        adjList[b].next = newNode;
+        newNode->next = g_adjList[b].next;
+        g_adjList[b].next = newNode;
 
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = b;
-        newNode->next = adjList[a].next;
-        adjList[a].next = newNode;
+        newNode->next = g_adjList[a].next;
+        g_adjList[a].next = newNode;
     }
 
     g_count = 0;

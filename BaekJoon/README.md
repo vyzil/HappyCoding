@@ -1,5 +1,6 @@
 ## 0. 고민해볼 문제
 
+- [1761_정점들의 거리](https://www.acmicpc.net/problem/1761) solve했는데, 최적화를 해야할 듯, 너무 오래걸림
 - [10891_Cactus? Not cactus?](https://www.acmicpc.net/problem/10891) 타잔 알고리즘을 응용해서 풀긴했는 데, 어떻게 풀었는지 정확하게는 모르겠음..
 
 ## 1. 복습할 문제
