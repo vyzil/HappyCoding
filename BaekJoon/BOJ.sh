@@ -1,4 +1,4 @@
-#!/bin/bash
+
 check_if_numeric() {
     if [[ ! $filename =~ ^[0-9]+$ ]]; then
         return 1
