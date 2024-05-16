@@ -55,6 +55,7 @@
 
 ### Segment Tree
 - [2042_구간 합 구하기](https://www.acmicpc.net/problem/2042) (기본)
+- [11505_구간 곱 구하기](https://www.acmicpc.net/problem/11505) (기본)
 
 ### KMP
 - [1786_찾기](https://www.acmicpc.net/problem/1786) (기본)
