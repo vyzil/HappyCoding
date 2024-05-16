@@ -11,7 +11,7 @@ typedef struct _NODE{
 } NODE;
 
 int checkList[N_MAX];
-NODE* adjList;
+NODE* g_adjList;
 
 int dfs(int x){
     int i;
@@ -21,7 +21,7 @@ int dfs(int x){
     if(checkList[x] == true) return false;
     checkList[x] = true;
 
-    curNode = &adjList[x];
+    curNode = &g_adjList[x];
     childNum = 0;
     while(curNode->next){
         if(checkList[curNode->next->num] == false) childNum++;
@@ -29,12 +29,12 @@ int dfs(int x){
     }
     if(childNum == 0) return true;
 
-    while(adjList[x].num){
+    while(g_adjList[x].num){
         scanf("%d", &y);
         y--;
         childNum = 0;
         find = false;
-        curNode = &adjList[x];
+        curNode = &g_adjList[x];
         while(curNode->next){
             // printf("asd => %d: %d %d\n", x+1, curNode->next->num + 1, y + 1);
             if(curNode->next->num == y && checkList[y] == false){
@@ -44,8 +44,8 @@ int dfs(int x){
             curNode = curNode->next;
         }
         if(find == true) {
-            adjList[x].num--;
-            adjList[y].num--;
+            g_adjList[x].num--;
+            g_adjList[y].num--;
             if(dfs(y) == false) return false;
         }
         else return false;
@@ -60,10 +60,10 @@ int main(void){
     NODE *newNode;
 
     scanf("%d", &N);
-    adjList = (NODE*)malloc(sizeof(NODE)*N);
+    g_adjList = (NODE*)malloc(sizeof(NODE)*N);
     for(i = 0; i < N; i++) {
-        adjList[i].num = 0;
-        adjList[i].next = NULL;
+        g_adjList[i].num = 0;
+        g_adjList[i].next = NULL;
         checkList[i] = false;
     }
     
@@ -72,15 +72,15 @@ int main(void){
         src--; dst--;
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = dst;
-        newNode->next = adjList[src].next;
-        adjList[src].next = newNode;
-        adjList[src].num++;
+        newNode->next = g_adjList[src].next;
+        g_adjList[src].next = newNode;
+        g_adjList[src].num++;
         
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = src;
-        newNode->next = adjList[dst].next;
-        adjList[dst].next = newNode;
-        adjList[dst].num++;
+        newNode->next = g_adjList[dst].next;
+        g_adjList[dst].next = newNode;
+        g_adjList[dst].num++;
 
     }
     scanf("%d", &i);

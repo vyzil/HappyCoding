@@ -10,7 +10,7 @@ typedef struct _NODE{
     struct _NODE *next;
 } NODE;
 
-NODE *adjList;
+NODE *g_adjList;
 int *checkList;
 int *heightList;
 int *heightNum;
@@ -29,7 +29,7 @@ int dfsCheck(int N){
     heightNum[height]++;
 
     checkList[curNum] = true;
-    curNode = &adjList[curNum];
+    curNode = &g_adjList[curNum];
     height++;
     while(curNode->next){
         if(checkList[curNode->next->num] == false) {
@@ -46,7 +46,7 @@ int dfsCheck(int N){
 
 
         checkList[curNum] = true;
-        curNode = &adjList[curNum];
+        curNode = &g_adjList[curNum];
         height++;
         while(curNode->next){
             if(checkList[curNode->next->num] == false) {
@@ -73,14 +73,14 @@ int main(void){
 
     scanf("%d", &N);
 
-    adjList = (NODE*)malloc(sizeof(NODE)*N);
+    g_adjList = (NODE*)malloc(sizeof(NODE)*N);
     checkList = (int*)malloc(sizeof(int)*N);
     heightList = (int*)malloc(sizeof(int)*N);
     heightNum = (int*)malloc(sizeof(int)*N);
 
     for(i = 0; i < N; i++) {
-        adjList[i].num = 0;
-        adjList[i].next = NULL;
+        g_adjList[i].num = 0;
+        g_adjList[i].next = NULL;
         checkList[i] = false;
         heightNum[i] = 0;
     }
@@ -90,15 +90,15 @@ int main(void){
         src--; dst--;
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = dst;
-        newNode->next = adjList[src].next;
-        adjList[src].next = newNode;
-        adjList[src].num++;
+        newNode->next = g_adjList[src].next;
+        g_adjList[src].next = newNode;
+        g_adjList[src].num++;
         
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = src;
-        newNode->next = adjList[dst].next;
-        adjList[dst].next = newNode;
-        adjList[dst].num++;
+        newNode->next = g_adjList[dst].next;
+        g_adjList[dst].next = newNode;
+        g_adjList[dst].num++;
 
     }
     
