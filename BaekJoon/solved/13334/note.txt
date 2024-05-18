@@ -1,0 +1,58 @@
+# 0001.c (solve, 2292 KB 56 MS)
+집, 사무실
+
+철로의 길이는 d로 고정
+집/ 사무실 위치가 선분에 포함되는 사람들의 수가 최대가 되도록
+
+d
+n개의 정수 쌍 (h_i, o_i)    // (i : n개), home, office
+
+사람수 n
+(h_i, o_i) 쌍 n개
+
+철로의 길이 d
+
+임의의 선분 d에 대해서 집과 사무실의 위치가 포함되는 최대 사람 수
+
+사람수 = 100,000
+좌표 = -100,000,000 ~ 100,000,000
+철로 길이는 1 <= d <= 200,000,000
+
+---
+우선 입력에 대해서 home, office 구분이 필요가 없음
+small, large로 받기
+large - small > d 면 아예 목록에서 제외
+
+n 갯수 만큼 small, large가 존재하니까,
+small 또는 large로 옮겨가면서 검사,
+
+---
+start를 기준으로 minHeap에 end를 넣기?
+Heap 최대 크기는 N*2
+
+input에 대해서는 small을 기준으로 하는 minHeap
+process 중에서는 large를 기준으로 하는 minHeap
+
+start 기준으로만 체크
+end 기준은 감소하는 일 밖에 없음
+따라서 max 값을 변경하지 않음
+
+start 기준으로 정렬된 g_inputHeap에서
+한개를 빼고,
+그 input의 large 값을 procHeap에 넣음
+
+그리고 철로 시작 값은 input의 small이 됨
+
+현재 procHeap의 값이 철로 시작값 보다 작으면 뻄
+최종 HeapSize가 포함되는 사람들임.
+
+--- 
+잘못 생각한듯
+
+end 기준으로 input을 정렬해서 proc해야할듯?
+end 정렬해서 Heap에서 꺼낼 때 마다 철로의 end를 해당 값으로 변경
+꺼낸 값의 start를 procHeap에 넣음
+
+그 때의 철로 start 값을 계산, proc Heap에서 해당 값보다 작은 애들을 뺌
+
+procHeap 크기를 출력
