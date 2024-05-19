@@ -11,46 +11,46 @@ int main(void){
     for(i = 0; i < 3; i++){
         for(j = 0; j < 3; j++) {
             scanf("%d", &map[i][j]);
-            if(map[i][j] == 0) map[i][j] =  NUM_MAX;
+            if(map[i][j] == 0) map[i][j] =  SIZE_MAX;
         }
     }
 
-    sum = NUM_MAX;
+    sum = SIZE_MAX;
     for(i = 0; i < 3; i++) {
         line = 0;
         for(j = 0; j < 3; j++) line += map[i][j];
-        if(line < NUM_MAX) sum = line;
+        if(line < SIZE_MAX) sum = line;
         
         line = 0;
         for(j = 0; j < 3; j++) line += map[j][i];
-        if(line < NUM_MAX) sum = line;
+        if(line < SIZE_MAX) sum = line;
 
         line = map[0][0] + map[1][1] + map[2][2];
-        if(line < NUM_MAX) sum = line;
+        if(line < SIZE_MAX) sum = line;
         
         line = map[2][0] + map[1][1] + map[0][2];
-        if(line < NUM_MAX) sum = line;
+        if(line < SIZE_MAX) sum = line;
     }
 
-    if(sum < NUM_MAX){ // Can calculate one line
+    if(sum < SIZE_MAX){ // Can calculate one line
         for(i = 0; i < 3; i++) {
             line = 0;
             for(j = 0; j < 3; j++) line += map[i][j];
-            if(NUM_MAX <= line && line < NUM_MAX*2){
-                line -= NUM_MAX;
+            if(SIZE_MAX <= line && line < SIZE_MAX*2){
+                line -= SIZE_MAX;
                 line = sum - line;
                 for(j = 0; j < 3 ; j++){
-                    if(map[i][j] == NUM_MAX) map[i][j] = line;
+                    if(map[i][j] == SIZE_MAX) map[i][j] = line;
                 }
             }
 
             line = 0;
             for(j = 0; j < 3; j++) line += map[j][i];
-            if(NUM_MAX <= line && line < NUM_MAX*2){
-                line -= NUM_MAX;
+            if(SIZE_MAX <= line && line < SIZE_MAX*2){
+                line -= SIZE_MAX;
                 line = sum - line;
                 for(j = 0; j < 3 ; j++){
-                    if(map[j][i] == NUM_MAX) map[j][i] = line;
+                    if(map[j][i] == SIZE_MAX) map[j][i] = line;
                 }
             }            
         }
@@ -58,11 +58,11 @@ int main(void){
         for(i = 0; i < 3; i++) {
             line = 0;
             for(j = 0; j < 3; j++) line += map[i][j];
-            if(NUM_MAX <= line && line < NUM_MAX*2){
-                line -= NUM_MAX;
+            if(SIZE_MAX <= line && line < SIZE_MAX*2){
+                line -= SIZE_MAX;
                 line = sum - line;
                 for(j = 0; j < 3 ; j++){
-                    if(map[i][j] == NUM_MAX) map[i][j] = line;
+                    if(map[i][j] == SIZE_MAX) map[i][j] = line;
                 }
             }
         }
@@ -79,17 +79,17 @@ int main(void){
             line = 0;
             for(j = 0; j < 3; j++) line += map[i][j];
             for(j = 0; j < 3; j++){
-                if(map[i][j] == NUM_MAX) map[i][j] = NUM_MAX + sum - line;
+                if(map[i][j] == SIZE_MAX) map[i][j] = SIZE_MAX + sum - line;
             }
         }
 
         line = map[0][0] + map[0][1] + map[0][2];
         tmp = map[0][0] + map[1][1] + map[2][2];
-        if(tmp < 3* NUM_MAX) tmp = map[2][0] + map[1][1] + map[0][2];
-        tmp = (line - tmp + 2* NUM_MAX) / 2;
+        if(tmp < 3* SIZE_MAX) tmp = map[2][0] + map[1][1] + map[0][2];
+        tmp = (line - tmp + 2* SIZE_MAX) / 2;
         for(i = 0; i < 3; i++){
             for(j = 0; j < 3; j++) {
-                if(map[i][j] >= NUM_MAX) map[i][j] = map[i][j] - NUM_MAX + tmp;
+                if(map[i][j] >= SIZE_MAX) map[i][j] = map[i][j] - SIZE_MAX + tmp;
             }
         }
     }
