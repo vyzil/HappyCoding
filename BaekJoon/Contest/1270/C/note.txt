@@ -1,0 +1,15 @@
+# 0001.c
+
+부분 string에 대해서 접을때 얻을 수 있는 최대 점수
+숫자가 작아서 Brute-force 가능
+
+대문자로만 이루어짐
+
+
+l -> i
+
+i+1 -> r
+
+for(i) l ~ r-1
+    for(j) 0 ~ MIN(i - l, r - (i + 1))
+        비교 i - j, i + 1 + j 같은거 count
