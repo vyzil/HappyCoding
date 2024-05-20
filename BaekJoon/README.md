@@ -1,6 +1,7 @@
 ## 0. 고민해볼 문제
 
 - [1006_습격자 초라기](https://www.acmicpc.net/problem/1006) 최적화 해야함. Modular 형태의 DP에서 내가 처리를 완벽하게 고민하지 않았고, 그냥 문제가 풀리기만 하게 코딩함.
+- [1517_버블 소트](https://www.acmicpc.net/problem/1517) 풀 수 있을 것 같은데...
 - [1761_정점들의 거리](https://www.acmicpc.net/problem/1761) 최적화를 해야할 듯, 너무 오래걸림
 - [10891_Cactus? Not cactus?](https://www.acmicpc.net/problem/10891) 타잔 알고리즘을 응용해서 풀긴했는 데, 어떻게 풀었는지 정확하게는 모르겠음..
 
