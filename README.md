@@ -2,7 +2,7 @@
 
 Study Algorithms & Solve Problems
 
-[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=husask)](https://solved.ac/husask/)
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=husask)](https://solved.ac/husask/) ![mazandi profile](http://mazandi.herokuapp.com/api?handle=husask&theme=dark)
 
 
 ## 1. 공부한 알고리즘 
