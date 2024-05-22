@@ -1,4 +1,44 @@
-# 0001.c
+# 0003.c
+Overflow 문제...
+B의 범위가 10^12 라서, ACCUM 을 계산할 때 약간의 문제가 있다..
+1. 128byte Data Type을 사용하기 -> Print문 구현
+2. 
+
+
+
+# 0003.c 
+Integer Overflow를 해결해야함.
+해결하고 DEBUG 지우고 제출하자.
+
+printf("1\n");
+
+
+# 0002.c 코드 깔끔하게 다시 -> 논리적인 문제는 대부분 해결한듯
+
+LINE(i) : i째 줄, 단어 i번 나왔을 때 word의 수 : ((i)/N) * arr[N-1] + (i%N == 0 ? 0 : arr[((i)%N)-1])
+ACCUM(i) : 
+
+arr[i] = 한 주기에서 i까지 등장하는 word의 갯수
+한 주기에서 워드의 갯수 = arr[N-1]
+
+큰주기 (삼각형 주기)를 계산하기 
+    + 삼각형 두개 + 가운데
+    + 삼각형은 정확히 N에서 끊기지 않으니 처리를 조금 해줘야함.
+
+큰주기로 대강 X번째 워드가 등장할 수 있는 범위 추리기
+
+추린 범위에서 가운데를 기준으로,
+가운데보다 작은지, 가운데인지, 가운데보다 큰지 파악
+작거나 크면 대략적인 이분탐색을 통해 KN <= X < (K+1)N 의 k를 파악 << 등호 여부는 다시 생각해봐야함
+k를 찾으면 이미 N에 누적합이 있기 때문에 N번 서칭하면 됨
+
+
+
+*** B의 주기가 N이랑 딱 맞을 때, Increasing Phase에서 커버할 수 있는지 체크 필요
+
+
+
+# 0001.c (포기, 코드가 너무 복잡해짐)
 
 게임에 쓰일 단어의 수 n,
 박자의 수 b
@@ -75,3 +115,48 @@ arr[i] = 한 주기에서 i까지 등장하는 word의 갯수
 k를 찾으면 이미 N에 누적합이 있기 때문에 N번 서칭하면 됨
 
 최악의 경우 이분탐색이 제일 critical path 인 것 같음
+
+unit = 한 주기
+line = 한 줄
+period = 한 이등변 삼각형
+// arr[0] 에 대해서 조심, 한 period에 한번만 나옴
+
+period의 시작
+ 1 : o
+     o o
+ N : o o o
+N+1: x x x o
+     x x x o o
+2N : x x x o o o
+2N1: x x x x x x o 
+     x x x x x x o o
+     x x x x x x o o o
+     ..
+ b : -----
+
+
+ ---
+
+
+i 라인의 워드 갯수
+(i/N) * arr[N-1] + (i%N > 0 ? arr[(i%N) - 1] : 0);
+
+iN line까지 워드 갯수
+((i * (i- 1))/2) * N * arr[N-1] + i * inTri;
+
+
+---
+
+
+
+
+1 : king(1)
+2 : king(2) god
+3 : king(3) god gd
+4 : king(4) god gd king(5)
+5 : king(6) god gd king(7) god
+6 : king(8) god gd king(9)
+7 : king(0) god gd
+8 : king(1) god
+9 : king(2)
+0 : king(3) god
