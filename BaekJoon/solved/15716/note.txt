@@ -1,3 +1,46 @@
+# 
+의도한대로 안됐던 원인은..
+
+--
+    else {  // decreasing Phase
+        turn += 2*(B - 1);
+-       curNum += period + arr[0];
++       curNum += period;
+        curRest = X - curNum;
+--
+아니... Period는 애초에 arr[0] 포함을 안하는데 왜 자꾸 뒤에서 고려해주려고 했던걸까..
+
+
+# 
+코너 케이스
++ curRest가 : 마이너스 에서 + 가되는 경우는 마이너스 상태로 끝나게 해줘야함
++ curRest가 : 0 에서 +가 되는 경우는 + 상태로 끝나야함
+
+# 0004.c solve
+
+왜 맞았지..?
+
+---
+        if(line > 0){
+            line = low * N;
+            turn -= line - 1;        
+            curNum -= (ll)ACCUM(line-1);
+            curRest = X - curNum;
+        }
+---
+여기서 line 초기화를 안하고 해서 항상 실행이 안됌 -> 이분탐색이 안되거 있었는데..?
+
+
+일단 if제거함.
+
+이분탐색으로 원하는 결과는
+예를 들어, 찾는 값이 kN ~ (k+1)N 이라면, 덜 빼고 올라가는 방향으로 하려고함.
+우선 상태를 넘치는 period로 만들어주고 시작.
+
+LINE(i) : i째 줄, 단어 i번 나왔을 때 word의 수 : ((i)/N) * arr[N-1] + (i%N == 0 ? 0 : arr[((i)%N)-1])
+ACCUM(i) : i째 줄, 단어가 1 ~ i까지 나왔을 때 word의 수 : 
+
+
 # 반례 정리
 
 3 3

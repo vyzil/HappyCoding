@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import subprocess
 import random
 import string
@@ -63,6 +64,11 @@ def main():
 
         if result1.stdout != result2.stdout:
             break
+
+        result3 = subprocess.run(['./visualize.py'],text=True, capture_output=True)
+        
+        with open('vis.out', 'w') as f:
+            f.write(result3.stdout)
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 #define STR_MAX 12
 #define N_MAX 200001
 
@@ -45,7 +44,7 @@ void print_u128(u128 value) {
     u128 _line;\
     u128 _unitNum = ((u128)(i)/N);\
     u128 _res = (((_unitNum) * (_unitNum - 1)) / 2) * N * arr[N-1] + _unitNum * triUnit; \
-    for(_line = N * _unitNum; _line <= (u128)i; _line++){\
+    for(_line = N * _unitNum; _line < (u128)i; _line++){\
         _res += LINE(_line);\
     }\
     _res;\
@@ -78,34 +77,28 @@ int main(void){
 
     // calc period
     u128 period = 0;
-    period = (2 * ACCUM(B-2)) + LINE(B-1) - arr[0];    
+    period = (2 * ACCUM(B-1)) + LINE(B-1) - arr[0];    
 
     // move base to right period
     ll turn, pass, curNum, curRest;
     pass = (ll)(((u128)X/period) - (u128)((u128)X%period? 0 : 1));
-    turn = pass * (2*(B-1));
+    turn = pass * (2*(B-1)) - 1;
     curNum = pass * period;
     curRest = X - curNum;
 
-    #define DEBUG 1
-    #ifdef DEBUG
-        printf("==========================\n");
-        printf("Noraml Phase, INIT\n");
-        printf("+ turn : %lld\n", turn);
-        printf("+ cNum : %lld\n", curNum);
-        printf("+ rest : %lld\n", curRest);
-        print_u128(ACCUM(B-1));
-    #endif
     // check phase to check, Increasing or Decreasing
     // Search appropriate kN first, and then search exact line
     ll low, mid, high, line;
-    if((u128)curRest <= ACCUM(B-1)){ // Increasing Phase
+
+    if((u128)curRest <= ACCUM(B)){ // Increasing Phase
         low = 0; high = (B-1) / N;
         while(low < high){
             mid = (low + high) / 2;
             if(ACCUM(mid * N) <= (u128)curRest) low = mid + 1;
             else high = mid;
         }
+
+
         if(low > 0) low--;
         line = low * N;
         turn += line;
@@ -113,72 +106,40 @@ int main(void){
         curRest = X - curNum;
 
         while(curRest > 0){
-            line++;
             turn++;
             curNum += LINE(line);
             curRest = X - curNum;
+            line++;
         }
     }
-    else {  // decreasing Phaselow = 0; high = (B-1) / N;
-        turn += 2*(B - 1) - 1;
+    else {  // decreasing Phase
+        turn += 2*(B - 1);
         curNum += period;
         curRest = X - curNum;
-
-            #ifdef DEBUG
-        printf("==========================\n");
-        printf("Decreasing Phase, INIT\n");
-        printf("+ turn : %lld\n", turn);
-        printf("+ cNum : %lld\n", curNum);
-        printf("+ rest : %lld\n", curRest);
-    #endif
 
         low = 0; high = (B-2) / N;
         while(low < high){
             mid = (low + high) / 2;
-            if(ACCUM(mid * N) <= (u128)(-curRest)) low = mid + 1;
+            if(ACCUM(mid * N) <= (u128)(-curRest + arr[0])) low = mid + 1;
             else high = mid;
         }
 
-        if(line > 0){
+        low--;
+        if(low > 0){
             line = low * N;
             turn -= line - 1;        
-            curNum -= (ll)ACCUM(line-1);
+            curNum -= (ll)ACCUM(line);
             curRest = X - curNum;
         }
 
-    #ifdef DEBUG
-        printf("==========================\n");
-        printf("Decreasing Phase, INIT\n");
-        printf("+ turn : %lld\n", turn);
-        printf("+ cNum : %lld\n", curNum);
-        printf("+ rest : %lld\n", curRest);
-        printf("+ line : %lld\n", line);
-    #endif
-
-        while(curRest < 0){
+        while(curRest <= 0){
             line++;
             turn--;
             curNum -= LINE(line);
             curRest = X - curNum;
-                        #ifdef DEBUG
-        printf("==========================\n");
-        printf("Decreasing Phase, INIT\n");
-        printf("+ turn : %lld\n", turn);
-        printf("+ cNum : %lld\n", curNum);
-        printf("+ rest : %lld\n", curRest);
-        printf("+ line : %lld\n", line);
-    #endif
         }
-
-        if(curRest > 0) turn++;
-
-        while(LINE(line + 1) == 0){
-            line++;
-            turn--;
-        }
-
+        turn++;
     }
-
     print_u128(turn+1);
 
     return 0;
