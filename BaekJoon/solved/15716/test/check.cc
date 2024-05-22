@@ -1,3 +1,7 @@
+/*
+ * Code from : https://blog.naver.com/rdd573/221271008932
+ */
+
 #include <cstdio>
 #include <cstring>
 #include <vector>
@@ -95,7 +99,7 @@ int main() {
 		if (strcmp(ts, s) == 0) v.push_back(i);
 	}
 	
-    if(b == 1) {printf("%lld", x); return 0;}
+    if(b == 1) {printf("%lld\n", x); return 0;}
 	ll l = 1, r = 1e18, mid, sum, temp;
 	while (l <= r) {
 		mid = (l + r) / 2;
@@ -110,5 +114,5 @@ int main() {
 		else l = mid + 1;
 	}
 
-	printf("%lld", l);
+	printf("%lld\n", l);
 }

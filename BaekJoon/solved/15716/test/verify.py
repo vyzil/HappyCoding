@@ -12,10 +12,16 @@ def generate_input(n, b, word, X, words):
 def main():
     # 입력 생성
     while(True):
-        n = random.randint(1, 200000)
-        b = random.randint(n, 10**12)
+        # n = random.randint(1, 200000)
+        # b = random.randint(n, 10**12)
+        # word = 'A'
+        # X = random.randint(1, 10**12)
+
+        n = random.randint(1, 3)
+        b = random.randint(n, 10)
+
         word = 'A'
-        X = random.randint(1, 10**12)
+        X = random.randint(1, 10)
         
         # words 리스트 생성
         words = []
@@ -26,6 +32,11 @@ def main():
             else:
                 # 다른 단어 생성
                 words.append('K')
+
+        if word not in words:
+            words.append(word)
+            n += 1
+            b += 1
 
         input_data = generate_input(n, b, word, X, words)
         
