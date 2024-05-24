@@ -13,14 +13,14 @@ typedef struct _TREE{
     int height;
 } TREE;
 
-NODE *g_adjList;
+NODE *adjList;
 TREE *g_tree;
 
 void makeTree(int n, int h){
     NODE *curNode;
 
     g_tree[n].height = h;
-    curNode = &g_adjList[n];
+    curNode = &adjList[n];
     while(curNode->next){
         if(g_tree[curNode->next->num].height == 0) {
             g_tree[curNode->next->num].parent = n;
@@ -67,11 +67,11 @@ int main(void){
     NODE *newNode;
 
     scanf("%d", &N);
-    g_adjList = (NODE*)malloc(sizeof(NODE)*N);
+    adjList = (NODE*)malloc(sizeof(NODE)*N);
     g_tree = (TREE*)malloc(sizeof(TREE)*N);
 
     for(i = 0; i < N; i++) {
-        g_adjList[i].next = NULL;
+        adjList[i].next = NULL;
         g_tree[i].height = 0;
     }
     for(i = 0; i < N-1; i++){
@@ -81,18 +81,18 @@ int main(void){
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = b;
         newNode->dist = c;
-        newNode->next = g_adjList[a].next;
-        g_adjList[a].next = newNode;
+        newNode->next = adjList[a].next;
+        adjList[a].next = newNode;
         
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = a;
         newNode->dist = c;
-        newNode->next = g_adjList[b].next;
-        g_adjList[b].next = newNode;
+        newNode->next = adjList[b].next;
+        adjList[b].next = newNode;
     }
 
     makeTree(0, 1);
-    free(g_adjList);
+    free(adjList);
 
     scanf("%d", &M);
     for(i = 0; i < M; i++) {

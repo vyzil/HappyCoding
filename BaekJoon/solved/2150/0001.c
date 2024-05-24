@@ -7,7 +7,7 @@ typedef struct NODE{
     struct NODE *next;
 } NODE;
 
-NODE* g_adjList;
+NODE* adjList;
 int global_adjListSize;
 int *global_stack;
 int global_stackTop;
@@ -23,20 +23,20 @@ int dfs(int num){
 
     global_stack[++global_stackTop] = num;
     id = global_stackTop + 1; // id should be larger than 0, since 0 means non-visited
-    g_adjList[num].num = id;
-    curNode = &(g_adjList[num]);
+    adjList[num].num = id;
+    curNode = &(adjList[num]);
 
     while(curNode->next){
-        childRoot = g_adjList[curNode->next->num].num;
+        childRoot = adjList[curNode->next->num].num;
         if(childRoot == 0) childRoot = dfs(curNode->next->num);         // never visited
-        if(childRoot < g_adjList[num].num) g_adjList[num].num = childRoot;  // visited but in current stack
+        if(childRoot < adjList[num].num) adjList[num].num = childRoot;  // visited but in current stack
         curNode = curNode->next;
     }
 
     // if num is root, pop until top becomes num
-    if(g_adjList[num].num == id){
+    if(adjList[num].num == id){
         while(id - 1 <=global_stackTop){
-            g_adjList[global_stack[global_stackTop]].num = global_adjListSize;         // update to max, which means finished
+            adjList[global_stack[global_stackTop]].num = global_adjListSize;         // update to max, which means finished
             global_sccInfo[global_stack[global_stackTop]] = global_sccNum;
             global_stackTop--;
         }
@@ -44,14 +44,14 @@ int dfs(int num){
         return id;
     }
     
-    return g_adjList[num].num;
+    return adjList[num].num;
 }
 
 int findNonVisited(){
     int i;
 
     for(i = 0; i < global_adjListSize; i++) {
-        if(g_adjList[i].num == 0) break;
+        if(adjList[i].num == 0) break;
     }
 
     return i;
@@ -68,18 +68,18 @@ int main(void){
     // Scan Input
     scanf("%d %d", &iV, &iE);
     global_adjListSize = iV;
-    g_adjList = (NODE*)malloc(sizeof(NODE)*iV);
+    adjList = (NODE*)malloc(sizeof(NODE)*iV);
     for(i = 0; i < iV; i++){
-        g_adjList[i].num = 0;
-        g_adjList[i].next = NULL;
+        adjList[i].num = 0;
+        adjList[i].next = NULL;
     }
     for(i = 0; i < iE; i++){
         scanf("%d %d", &iA, &iB);
         iA--; iB--;
         newNode = (NODE*)malloc(sizeof(NODE));
         newNode->num = iB;
-        newNode->next = g_adjList[iA].next;
-        g_adjList[iA].next = newNode;
+        newNode->next = adjList[iA].next;
+        adjList[iA].next = newNode;
     }
 
     // Calc SCC
@@ -87,7 +87,7 @@ int main(void){
     global_stackTop = -1;
     global_sccInfo = (int*)malloc(sizeof(int)*iV);
     global_sccNum = 0;
-    while( (curNum = findNonVisited(g_adjList, iV)) < iV ) dfs(curNum);
+    while( (curNum = findNonVisited(adjList, iV)) < iV ) dfs(curNum);
 
     // Print in Order
     sccMeta = (int*)malloc(sizeof(int)*global_sccNum);
