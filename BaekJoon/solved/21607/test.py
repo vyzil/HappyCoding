@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# Code by CHATGPT, Failed..
 
 MOD = 100003
 
