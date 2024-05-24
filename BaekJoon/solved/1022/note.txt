@@ -1,0 +1,14 @@
+#
+(0,0) 시작, 
+i는 양수
+(i, i) -> UP to LEFT
+(i, -i) -> RIGHT to UP
+(-i, i) -> LEFT to DOWN
+(-i, -i) -> DOWN to RIGHT
+
+
+
+# 0001.c
+메모리 초과
+
+10,000 * 10,000 * 4 > 128MB
