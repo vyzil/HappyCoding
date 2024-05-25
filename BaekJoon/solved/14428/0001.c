@@ -4,7 +4,7 @@
 #define A_MAX 1000000001
 
 int *g_segTree, g_treeSize;
-int *g_input, g_inputSize;
+int *input, g_inputSize;
 
 int makeTree(int tIdx, int start, int end){
     int leftIdx, rightIdx, minIdx;
@@ -12,7 +12,7 @@ int makeTree(int tIdx, int start, int end){
     else {
         leftIdx = makeTree(2*tIdx, start, (start+end)/2);
         rightIdx = makeTree(2*tIdx+1, (start+end)/2 + 1, end);
-        minIdx = (g_input[leftIdx] <= g_input[rightIdx] ? leftIdx : rightIdx);
+        minIdx = (input[leftIdx] <= input[rightIdx] ? leftIdx : rightIdx);
     }
 
     return g_segTree[tIdx] = minIdx;
@@ -22,7 +22,7 @@ int updateTree(int tIdx, int start, int end, int idx, int num){
     int minIdx, leftIdx, rightIdx;
 
     if(start == end) {
-        g_input[idx] = num;
+        input[idx] = num;
         minIdx = start;
     }
     else {
@@ -31,7 +31,7 @@ int updateTree(int tIdx, int start, int end, int idx, int num){
         if(start <= idx && idx <= (start+end)/2) leftIdx = updateTree(2*tIdx, start, (start+end)/2, idx, num);
         else rightIdx = updateTree(2*tIdx+1, (start+end)/2 + 1 ,end, idx, num);
 
-        minIdx = (g_input[leftIdx] <= g_input[rightIdx] ? leftIdx : rightIdx);
+        minIdx = (input[leftIdx] <= input[rightIdx] ? leftIdx : rightIdx);
     }
 
     return g_segTree[tIdx] = minIdx;
@@ -47,7 +47,7 @@ int queryTree(int tIdx, int start, int end, int s, int e){
     if(start <= e && s <= (start + end)/2) leftIdx = queryTree(2*tIdx, start, (start + end)/2, s, e);
     if((start + end)/2+1 <= e && s <= end) rightIdx = queryTree(2*tIdx+1, (start + end)/2 + 1, end, s, e);
 
-    minIdx = (g_input[leftIdx] <= g_input[rightIdx] ? leftIdx : rightIdx);
+    minIdx = (input[leftIdx] <= input[rightIdx] ? leftIdx : rightIdx);
 
     return minIdx;
 }
@@ -59,9 +59,9 @@ int main(void){
     int a, b, c;
    
     scanf("%d", &N);
-    g_input = (int*)malloc(sizeof(int)*(N+1));
-    for(i = 0; i < N; i++) scanf("%d", &g_input[i]);
-    g_input[N] = A_MAX;
+    input = (int*)malloc(sizeof(int)*(N+1));
+    for(i = 0; i < N; i++) scanf("%d", &input[i]);
+    input[N] = A_MAX;
     g_inputSize = N;
 
     for(g_treeSize = 1; g_treeSize < N; g_treeSize <<= 1);

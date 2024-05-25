@@ -3,7 +3,7 @@
 
 #define MAX_H 1000000001
 
-int *g_input;
+int *input;
 int *g_segTree, g_treeSize;
 int g_min, g_minIdx;
 int N;
@@ -14,7 +14,7 @@ int makeTree(int idx, int start, int end){
     else {
         lChild = makeTree(2*idx, start, (start + end)/2);
         rChild = makeTree(2*idx+1, (start + end)/2 + 1, end);
-        if(g_input[lChild] > g_input[rChild]) g_segTree[idx] = rChild;
+        if(input[lChild] > input[rChild]) g_segTree[idx] = rChild;
         else g_segTree[idx] = lChild;
     }
     return g_segTree[idx];
@@ -27,7 +27,7 @@ int minRange(int idx, int start, int end, int s, int e){
     else {
         lChild = minRange(2*idx, start, (start + end)/2, s, e);
         rChild = minRange(2*idx+1, (start + end)/2 + 1, end, s, e);
-        if(g_input[lChild] > g_input[rChild]) curMin = rChild;
+        if(input[lChild] > input[rChild]) curMin = rChild;
         else curMin = lChild;
     }
     return curMin;
@@ -36,7 +36,7 @@ int minRange(int idx, int start, int end, int s, int e){
 int divNcon(int start, int end){
     int mid, curMax, lMax, rMax;
     mid = minRange(1, 0, N-1, start, end);
-    curMax = g_input[mid] * (end-start+1);
+    curMax = input[mid] * (end-start+1);
     
     if(start <= mid-1) {
         lMax = divNcon(start, mid - 1);
@@ -53,9 +53,9 @@ int divNcon(int start, int end){
 int main(void){
     int i;  
     scanf("%d", &N);
-    g_input = (int*)malloc(sizeof(int)*(N+1));
-    for(i = 0; i < N; i++) scanf("%d", &g_input[i]);
-    g_input[N] = MAX_H;
+    input = (int*)malloc(sizeof(int)*(N+1));
+    for(i = 0; i < N; i++) scanf("%d", &input[i]);
+    input[N] = MAX_H;
 
     for(g_treeSize=1; g_treeSize < N; g_treeSize <<= 1);
     g_treeSize <<= 1;
@@ -67,7 +67,7 @@ int main(void){
     printf("%d\n", divNcon(0, N-1));
 
     free(g_segTree);
-    free(g_input);
+    free(input);
 
     return 0;
 }
