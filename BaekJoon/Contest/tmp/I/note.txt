@@ -1,0 +1,58 @@
+# 다시 생각하기
+2 ~ 97
+0 -> 찾기
+1 -> 1개 찾기
+
+# 0002.c
+
+# 0001.c -> 쿼리가 많잖아..
+Flush
+fflush(stdout)
+
+흠..
+결국 1개씩만 있을 떄 유의미한 서칭 가능
+
+절반 절반씩 하다보면 
+최악의 경우 92번 정도 까지도 가능 (마지막 두개이면)
+
+즉 두개씩 서칭해야함
+
+그러면 46 번
+
+1 2
+2 3
+...
+46 47
+
+1. 두개 동시)
+x x o o x x
+X O X O X           O 가 두개       o
+
+- 끝경우)
+o o x x x
+X O X X X           O 가 한개       o
+
+x x x o o
+X X X O X           O 가 한개       o
+
+
+
+
+2. 두개 멀리
+x o x o x x
+O O O O X           O 가 4개
+
+x o x x o x
+O O X O O           O가 4개
+
+끝경우)
+o x x o x x
+O x O O X           O가 3개     
+
+x x x o x o
+x x O O O           O가 3개
+
+o x x x x o
+O X X X O           O가 2개     o
+
+AK소리 47번 이내
