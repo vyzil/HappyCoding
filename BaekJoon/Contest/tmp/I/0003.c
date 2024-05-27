@@ -2,65 +2,69 @@
 
 #define PRINTRES(x, y) (printf("! %d %d\n", (x), (y)))
 
-int N = 92;
-int arr[92];
+typedef struct _NODE{
+    int l, r;
+} NODE;
 
 char ask(int l, int r){
     char res[2];
-    if(found == 2) return "X";
     printf("AK %d %d\n", l, r); fflush(stdout);
     scanf("%s", res);
     return res[0];
 }
 
-int found;
-int num[2];
-
-// low ~ mid, mid+1 ~ high-1, high
-void ak47(int low, int high, int left){
-    int mid;
-    int res, l, r;
-
-    if(left == 1 || high - low < 2){
-        if(low == high) {
-            num[found++] = low;
-            return;
-        }
-        mid = (low + high) / 2;
-        if(ask(low, mid) == 'O') ak47(low, mid, left);
-        else ak47(mid+1, high, left);
-        return;
-    }
-    else {  // left == 2 and high - low >= 2
-        mid = (low + high-1)/2;
-        l = (ask(low, mid) == 'O');
-        r = (ask(mid+1, high-1) == 'O');         
-        if(l + r == 2 || l + r == 0){
-            ak47(low, mid, 2);
-            ak47(mid+1, high-1, 2);
-        }
-        else if(l + r == 1){
-            num[found++] = high;
-            if(l) ak47(low, mid, 1);
-            else ak47(mid+1, high-1, 1);
-        }        
-        return;
-    }
-    return;
-}
-
 int main(void){
     int TC;
-    int i;
-    int N;
-    int found;
-    char res[2];
+    int i, j, cnt;
+    int l ,r;
+    int N, range, isSame;
+    NODE candidate[5]; int found;
+    char res[50];
 
-    
-
-    found = 0; num[0] = 0; num[1] = 0;
-    ak47(2, N, 2);
-    printf("! %d %d\n", num[0], num[1]); fflush(stdout);
+    scanf("%d", &TC);
+    while(TC--){
+        scanf("%d", &N);
+        r = (1+N)/2;
+        int count = 0;
+        for(l = 1; r <= N; l++, r++){
+            res[l] = ask(l, r);
+            count++;
+        }
+        found = 0;
+        candidate[0].l = 0; candidate[0].r = 0;
+        candidate[1].l = 0; candidate[1].r = 0;
+        for(i = 1; i < N; i++){
+            for(j = i+1; j <= N; j++){
+                isSame = 1;                
+                r = (1+N)/2;
+                for(l = 1; r <= N; l++, r++){
+                    cnt = 0;
+                    if(l <= i && i <= r) cnt++;
+                    if(l <= j && j <= r) cnt++;
+                    if((cnt == 1 && res[l] != 'O') || (cnt != 1 && res[l] != 'X')){
+                        isSame = 0;
+                        break;
+                    }
+                }
+                if(isSame) {
+                    candidate[found].l = i;
+                    candidate[found].r = j;
+                    found++;
+                }
+            }
+        }
+        if(found == 1) PRINTRES(candidate[0].l, candidate[0].r);
+        else { // found == 2
+            l = candidate[0].l;
+            if(candidate[0].l == candidate[1].l || candidate[0].l == candidate[1].r) l = candidate[0].l;
+            r = l;
+            
+            if(ask(l, r) == 'O') PRINTRES(candidate[0].l, candidate[0].r);
+            else PRINTRES(candidate[1].l, candidate[1].r);
+        }
+        printf("%d %d\n", count, found);
+        fflush(stdout);
+    }
 
     return 0;
 }
