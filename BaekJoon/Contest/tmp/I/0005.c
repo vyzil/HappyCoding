@@ -75,7 +75,6 @@ NODE Solve(int N){
     return result;
 }
 
-#define PRINTRES(x) (printf("! %d %d\n", (x).l, (x).r))
 int main(void){
     int TC;    
     int N;
@@ -85,9 +84,8 @@ int main(void){
     while(TC--){
         scanf("%d", &N);
         result = Solve(N);
-        PRINTRES(result);
+        (printf("! %d %d\n", result.l, result.r));
         fflush(stdout);
     }
     return 0;
 }
-#undef PRINTRES
