@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-#define PRINTRES(x) (printf("! %d %d\n", (x).l, (x).r))
-
 typedef struct _NODE{
     int l, r;
 } NODE;
@@ -49,11 +47,7 @@ NODE BruteForce(int N){
     response[1] = 'X';
     l = 2;
     r = N/2 + 2;
-    int count = 1; //** debug
-    for(; r <= N; l++, r++){
-        response[l] = ask(l, r);
-        count++; //** debug
-    }
+    for(; r <= N; l++, r++) response[l] = ask(l, r);
     found = 0;
     candidate[0].l = 0; candidate[0].r = 0;
     candidate[1].l = 0; candidate[1].r = 0;
@@ -83,16 +77,11 @@ NODE BruteForce(int N){
         l = candidate[0].l;
         if(candidate[0].l == candidate[1].l || candidate[0].l == candidate[1].r) l = candidate[0].r;
         r = l;
-        count++; //**debug
         if(ask(l, r) == 'X') {
             result.l = candidate[1].l;
             result.r = candidate[1].r;
         }
     }
-    // printf("%d %d\n", count, found); //** debug
-    // for(int i = 0; i < found ;i++){
-    //     printf("found : %d %d\n", candidate[i].l, candidate[i].r);
-    // }
     return result;
 }
 
@@ -101,7 +90,7 @@ int main(void){
     int N;
     NODE result;
     char response;
-
+    
     scanf("%d", &TC);
     while(TC--){
         scanf("%d", &N);
@@ -122,7 +111,10 @@ int main(void){
             if (response == 'O') result = BinarySearch(N);
             else result = BruteForce(N);
         }
+        
+    #define PRINTRES(x) (printf("! %d %d\n", (x).l, (x).r))
         PRINTRES(result);
+    #undef PRINTRES
         fflush(stdout);
     }
 
