@@ -38,7 +38,7 @@ NODE BinarySearch(int N){
     return result;
 }
 
-NODE BruteForce(int N){
+NODE Solve(int N){
     int i, j, cnt;
     int l, r;
     char response[50];
@@ -120,7 +120,7 @@ int main(void){
         if (N > 3){
             response = ask(1, N/2 + 1);
             if (response == 'O') result = BinarySearch(N);
-            else result = BruteForce(N);
+            else result = Solve(N);
         }
         PRINTRES(result);
         fflush(stdout);

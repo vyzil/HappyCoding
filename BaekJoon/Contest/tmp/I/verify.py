@@ -12,15 +12,12 @@ def check_in_range(num1, num2, range_start, range_end):
     
     return in_range_count % 2
 
-def solve(N):
+def solve(N, num1, num2):
     # 첫 번째 입력: "1 92"
     input_range = f"1 {N}"
-    print(f"Sending initial input: {input_range}")
+    # print(f"Sending initial input: {input_range}")
     
-    # 1부터 92 사이의 서로 다른 두 숫자를 선택
-    selected_numbers = random.sample(range(1, N+1), 2)
-    num1, num2 = selected_numbers[0], selected_numbers[1]
-    print(f"Selected numbers: {num1}, {num2}")
+    # print(f"Selected numbers: {num1}, {num2}")
 
     # 실행 파일과의 상호작용
     process = subprocess.Popen("./a.out", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -32,7 +29,7 @@ def solve(N):
     count = 0
     while True:
         output = process.stdout.readline().strip()
-        print(f"Received from a.out: {output}")
+        # print(f"Received from a.out: {output}")
 
         if output.startswith("AK"):
             count += 1
@@ -42,7 +39,7 @@ def solve(N):
                 response = "O"
             else:
                 response = "X"
-            print(f"Sending response: {response}")
+            # print(f"Sending response: {response}")
             process.stdin.write(f"{response}\n")
             process.stdin.flush()
         
@@ -53,7 +50,10 @@ def solve(N):
                 result = "Correct!"
             else:
                 result = "Incorrect!"
-            print(f"Final result: {result}")
+            # print(f"Final result: {result}")
+            break
+        if count > 100:
+            result = "Incorrect!"
             break
 
     print("Count : ", count, "{", N, num1, num2 , "}")
@@ -63,14 +63,23 @@ def solve(N):
     process.stderr.close()
     process.terminate()
 
-    if result == "Incorrect!":
+    if result == "Incorrect!" or count > 47:
         return 0
     else:
         return 1
 
 if __name__ == "__main__":
-    while True:
-        N = random.randint(2, 93)
-        # N = 92
-        if(solve(N) == 0):
-            break
+    # while True:
+    #     # N = random.randint(2, 93)
+    #     # 1부터 92 사이의 서로 다른 두 숫자를 선택
+    #     selected_numbers = random.sample(range(1, N+1), 2)
+    #     num1, num2 = selected_numbers[0], selected_numbers[1]
+    #     N = 92
+    #     if(solve(N) == 0):
+    #         break
+
+    for i in range(2, 93):
+        for j in range(1, i):
+            for k in range(j+1, i+1):
+                if(solve(i, j, k) == 0):
+                    break

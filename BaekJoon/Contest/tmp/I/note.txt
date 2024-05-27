@@ -1,3 +1,43 @@
+# 0005
+
+집가면서 생각해보니 bruteforce 안해도
+그냥 짠 코드 조금 수정하면 될 것 같음
+
+수정할 방향은
+반씩 sliding 해서 1을 찾음 -> 바로 이분탐색 들어감
+
+
+case 1)
+[o...o..]
+o[...o...] -> l ~ (N/2+1)
+
+
+case 2)
+[.....]o..o
+.[.....o]..o -> r+1 ~ N
+
+두 케이스의 각 o가 있을 수 있는 범위 중, 큰 값을 기반으로 서치를 먼저 해야함
+
+                if(r+1 <= N && ask(r+1, N) == 'O') {
+                    result.l = r;
+                    result.r = BinarySearch(N, r+1, N);
+                }
+                else {
+                    result.l = l-1;
+                    result.r = BinarySearch(N, l, N/2 + 1);
+                }
+
+                if(ask(r+1, N) == 'O') {
+                    result.l = l-1;
+                    result.r = BinarySearch(N, l, N/2 + 1);
+                }
+                else {
+                    result.l = r;
+                    result.r = BinarySearch(N, r+1, N);
+                }
+
+# 0004 solve
+
 # 
 첫 구간이 1일때가 엄청 많음
 전부 O 인 경우,, (나가면서 들어오는 경우)
