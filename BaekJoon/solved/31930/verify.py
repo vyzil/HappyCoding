@@ -15,10 +15,8 @@ def check_in_range(num1, num2, range_start, range_end):
 def solve(N, num1, num2):
     # 첫 번째 입력: "1 92"
     input_range = f"1 {N}"
-    # print(f"Sending initial input: {input_range}")
-    
+    # print(f"Sending initial input: {input_range}")    
     # print(f"Selected numbers: {num1}, {num2}")
-
     # 실행 파일과의 상호작용
     process = subprocess.Popen("./a.out", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     
@@ -35,6 +33,9 @@ def solve(N, num1, num2):
             count += 1
             _, start, end = output.split()
             start, end = int(start), int(end)
+            if not (1 <= start <= N) or not (1 <= end <= N) or start > end:
+                result = "Incorrect!"
+                break
             if check_in_range(num1, num2, start, end):
                 response = "O"
             else:
@@ -50,7 +51,7 @@ def solve(N, num1, num2):
                 result = "Correct!"
             else:
                 result = "Incorrect!"
-            # print(f"Final result: {result}")
+                # print(f"Final result: {result}")
             break
         if count > 100:
             result = "Incorrect!"
@@ -63,7 +64,7 @@ def solve(N, num1, num2):
     process.stderr.close()
     process.terminate()
 
-    if result == "Incorrect!" or count > 47:
+    if result != "Correct!" or count > 47:
         return 0
     else:
         return 1
@@ -77,9 +78,10 @@ if __name__ == "__main__":
     #     N = 92
     #     if(solve(N) == 0):
     #         break
+    # solve(3, 1, 2)
 
     for i in range(2, 93):
         for j in range(1, i):
             for k in range(j+1, i+1):
                 if(solve(i, j, k) == 0):
-                    break
+                    exit(-1)

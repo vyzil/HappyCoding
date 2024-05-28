@@ -65,8 +65,9 @@ NODE Solve(int N){
                 }
             }
             else {  // r == N
-                if(ask(l, l) == 'O') result.l = l;
-                else result.l = l+1;
+                result.l = l-1;
+                if(ask(l, l) == 'O') result.r = l;
+                else result.r = l+1;
             }
             break;
         }      
@@ -84,7 +85,7 @@ int main(void){
     while(TC--){
         scanf("%d", &N);
         result = Solve(N);
-        (printf("! %d %d\n", result.l, result.r));
+        printf("! %d %d\n", result.l, result.r);
         fflush(stdout);
     }
     return 0;
