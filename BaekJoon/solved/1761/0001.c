@@ -10,7 +10,7 @@ typedef struct _NODE{
 typedef struct _TREE{
     int parent;
     int dist;
-    int height;
+    int depth;
 } TREE;
 
 NODE *adjList;
@@ -19,10 +19,10 @@ TREE *g_tree;
 void makeTree(int n, int h){
     NODE *curNode;
 
-    g_tree[n].height = h;
+    g_tree[n].depth = h;
     curNode = &adjList[n];
     while(curNode->next){
-        if(g_tree[curNode->next->num].height == 0) {
+        if(g_tree[curNode->next->num].depth == 0) {
             g_tree[curNode->next->num].parent = n;
             g_tree[curNode->next->num].dist = curNode->next->dist;
             makeTree(curNode->next->num, h+1);
@@ -41,11 +41,11 @@ int distance(int a, int b){
     aRoot = a; bRoot = b;
    
     while(aRoot != bRoot){
-        if(g_tree[aRoot].height < g_tree[bRoot].height){
+        if(g_tree[aRoot].depth < g_tree[bRoot].depth){
             res += g_tree[bRoot].dist;
             bRoot = g_tree[bRoot].parent;
         }
-        else if(g_tree[aRoot].height > g_tree[bRoot].height){
+        else if(g_tree[aRoot].depth > g_tree[bRoot].depth){
             res += g_tree[aRoot].dist;
             aRoot = g_tree[aRoot].parent;
         }
@@ -72,7 +72,7 @@ int main(void){
 
     for(i = 0; i < N; i++) {
         adjList[i].next = NULL;
-        g_tree[i].height = 0;
+        g_tree[i].depth = 0;
     }
     for(i = 0; i < N-1; i++){
         scanf("%d %d %d", &a, &b, &c);
