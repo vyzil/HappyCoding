@@ -1,0 +1,10 @@
+# 
+
+EW 갯수 count?
+
+
+초기는 E mode로 시작, cnt  = 1,
+
+W가 발견되면 W mode로 변경
+
+W mode에서 E 발견시 1추가 
