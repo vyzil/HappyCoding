@@ -1,0 +1,5 @@
+# checkList 만들기
+stack에 넣어가면서 진행
+- "now visiting" 만나면 해당 원소까지 pop하면서 "cycle" 표시
+- 들어갔던거 전부 pop하면서 "not cycle"표시
+다음원소 시작 -> 다음 원소는 "not visited"면 서칭
